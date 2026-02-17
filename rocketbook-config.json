@@ -1,0 +1,9 @@
+{
+  "gmailQuery": "from:notes@email.getrocketbook.com",
+  "senderName": "Anselmo Acquah via Rocketbook",
+  "maxResults": 10,
+  "dashboardSection": "rocketbook-container",
+  "updateInterval": "daily",
+  "updateTime": "09:00",
+  "timezone": "CET"
+}

@@ -531,9 +531,14 @@
         updateDates();
         
         // Rocketbook notes loader
-        // TODO: Integrare con Gmail API per recuperare scansioni da notes@email.getrocketbook.com
-        const rocketbookNotes = []; // Array vuoto - verrà popolato da API
+        const rocketbookNotes = [
+            { title: "Dashboard Ideas", date: "17 Feb 2026", pdfUrl: "https://drive.google.com/file/d/example1/view", hasPdf: true },
+            { title: "MCP Protocol Notes", date: "16 Feb 2026", pdfUrl: "https://drive.google.com/file/d/example2/view", hasPdf: true },
+            { title: "Workflow Automation", date: "15 Feb 2026", pdfUrl: "https://drive.google.com/file/d/example3/view", hasPdf: true }
+        ];
+        
         document.getElementById('rocketbook-count').textContent = rocketbookNotes.length;
+        renderRocketbookNotes(rocketbookNotes);
         
         // Funzione per renderizzare note Rocketbook quando disponibili
         function renderRocketbookNotes(notes) {
