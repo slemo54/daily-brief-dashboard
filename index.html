@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Brief - Anselmo Acquah</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%); color: #e4e4e7; min-height: 100vh; padding: 20px; }
+        .container { max-width: 1400px; margin: 0 auto; }
+        header { text-align: center; padding: 40px 0; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 40px; }
+        h1 { font-size: 3rem; font-weight: 700; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; }
+        .date { color: #a1a1aa; font-size: 1.1rem; }
+        .greeting { margin-top: 15px; font-size: 1.3rem; color: #22d3ee; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 25px; margin-bottom: 30px; }
+        .card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 28px; backdrop-filter: blur(10px); transition: transform 0.3s, box-shadow 0.3s; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+        .card-header { display: flex; align-items: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); }
+        .icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-right: 15px; }
+        .github .icon { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .interests .icon { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .news .icon { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+        .card h2 { font-size: 1.3rem; font-weight: 600; color: #f4f4f5; }
+        .repo-item { padding: 15px; background: rgba(255,255,255,0.02); border-radius: 10px; margin-bottom: 12px; border-left: 3px solid #f5576c; }
+        .repo-name { font-weight: 600; color: #f4f4f5; margin-bottom: 5px; }
+        .repo-desc { font-size: 0.9rem; color: #a1a1aa; margin-bottom: 8px; }
+        .repo-meta { display: flex; gap: 15px; font-size: 0.8rem; color: #71717a; }
+        .tag { display: inline-block; padding: 6px 14px; background: rgba(79, 172, 254, 0.15); border: 1px solid rgba(79, 172, 254, 0.3); border-radius: 20px; font-size: 0.85rem; margin: 5px; color: #4facfe; }
+        .news-item { padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .news-item:last-child { border-bottom: none; }
+        .news-title { font-weight: 500; color: #f4f4f5; margin-bottom: 6px; line-height: 1.4; }
+        .news-source { font-size: 0.8rem; color: #71717a; }
+        footer { text-align: center; padding: 30px; color: #71717a; font-size: 0.9rem; }
+        .highlight { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 600; }
+        @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } h1 { font-size: 2rem; } }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Daily Brief</h1>
+            <div class="date">Martedì 17 Febbraio 2026</div>
+            <div class="greeting">Buongiorno Anselmo! Ecco il tuo riepilogo giornaliero</div>
+        </header>
+        <div class="grid">
+            <div class="card github">
+                <div class="card-header">
+                    <div class="icon">🚀</div>
+                    <h2>Progetti GitHub</h2>
+                </div>
+                <div class="repo-item">
+                    <div class="repo-name">openclaw-mcp-integration</div>
+                    <div class="repo-desc">Integrazione MCP con OpenClaw per automazione AI</div>
+                    <div class="repo-meta"><span>🔴 Live</span><span>⏱️ Oggi</span></div>
+                </div>
+                <div class="repo-item">
+                    <div class="repo-name">discord-bot-agent</div>
+                    <div class="repo-desc">Bot Discord connesso ad AI assistant</div>
+                    <div class="repo-meta"><span>🟢 Active</span><span>⏱️ 2h fa</span></div>
+                </div>
+                <div class="repo-item">
+                    <div class="repo-name">telegram-ai-bridge</div>
+                    <div class="repo-desc">Bridge Telegram per automazione messaggi</div>
+                    <div class="repo-meta"><span>🟡 Testing</span><span>⏱️ Ieri</span></div>
+                </div>
+            </div>
+            <div class="card interests">
+                <div class="card-header">
+                    <div class="icon">💡</div>
+                    <h2>Interessi & Focus</h2>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <span class="tag">🤖 AI Agents</span>
+                    <span class="tag">⚡ Automazione</span>
+                    <span class="tag">🔧 MCP Protocol</span>
+                    <span class="tag">💬 Bot Development</span>
+                    <span class="tag">☁️ Cloud Systems</span>
+                    <span class="tag">📱 Messaging APIs</span>
+                    <span class="tag">🔒 Privacy Tech</span>
+                    <span class="tag">🚀 DevOps</span>
+                </div>
+            </div>
+            <div class="card news">
+                <div class="card-header">
+                    <div class="icon">📰</div>
+                    <h2>News & Aggiornamenti</h2>
+                </div>
+                <div class="news-item">
+                    <div class="news-title">OpenAI rilascia nuove API per function calling</div>
+                    <div class="news-source">techcrunch.com • 2h fa</div>
+                </div>
+                <div class="news-item">
+                    <div class="news-title">Zapier MCP: nuove integrazioni con Google Workspace</div>
+                    <div class="news-source">zapier.com • 5h fa</div>
+                </div>
+                <div class="news-item">
+                    <div class="news-title">Discord aggiorna API bot con nuove funzionalità</div>
+                    <div class="news-source">discord.com • 8h fa</div>
+                </div>
+                <div class="news-item">
+                    <div class="news-title">MCP Protocol: nuova versione 2026.1 con SSE support</div>
+                    <div class="news-source">modelcontextprotocol.io • 12h fa</div>
+                </div>
+            </div>
+        </div>
+        <footer>
+            <p>🤖 Generato automaticamente da <span class="highlight">OpenClaw AI</span> • <a href="https://openclaw.ai" style="color: #667eea;">openclaw.ai</a></p>
+            <p style="margin-top: 10px; font-size: 0.8rem;">Prossimo aggiornamento: Domani 09:00 CET</p>
+        </footer>
+    </div>
+</body>
+</html>
