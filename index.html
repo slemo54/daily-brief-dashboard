@@ -45,7 +45,6 @@
         }
         .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
         
-        /* Header */
         header { 
             text-align: center; 
             padding: 60px 20px 40px;
@@ -82,18 +81,9 @@
             margin-bottom: 10px;
             letter-spacing: -0.02em;
         }
-        .subtitle {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-        }
-        .date { 
-            color: var(--text-muted);
-            font-size: 0.95rem;
-            font-variant-numeric: tabular-nums;
-        }
+        .subtitle { color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 8px; }
+        .date { color: var(--text-muted); font-size: 0.95rem; font-variant-numeric: tabular-nums; }
         
-        /* Theme Toggle */
         .theme-toggle { 
             position: fixed;
             top: 20px;
@@ -108,169 +98,86 @@
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
         }
-        .theme-toggle:hover { 
-            transform: scale(1.1);
-            box-shadow: 0 0 30px var(--glow);
-        }
+        .theme-toggle:hover { transform: scale(1.1); box-shadow: 0 0 30px var(--glow); }
         
-        /* KPI Section */
         .kpi-section { margin-bottom: 40px; }
         .kpi-grid { 
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 16px;
         }
         .kpi-card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 20px;
-            padding: 28px;
+            border-radius: 16px;
+            padding: 24px 20px;
             text-align: center;
-            position: relative;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.3s ease;
             backdrop-filter: blur(10px);
-            overflow: hidden;
         }
-        .kpi-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        .kpi-card:hover::before { opacity: 1; }
-        .kpi-card:hover { 
-            transform: translateY(-8px);
-            box-shadow: 0 20px 40px var(--glow);
-        }
-        .kpi-icon {
-            font-size: 2.5rem;
-            margin-bottom: 12px;
-            display: block;
-        }
+        .kpi-card:hover { transform: translateY(-4px); box-shadow: 0 12px 30px var(--glow); }
+        .kpi-icon { font-size: 2rem; margin-bottom: 10px; display: block; }
         .kpi-value {
-            font-size: 3rem;
+            font-size: 2.5rem;
             font-weight: 800;
             background: linear-gradient(135deg, var(--text-primary), var(--text-secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             line-height: 1;
-            font-variant-numeric: tabular-nums;
         }
-        .kpi-label {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-            margin-top: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
+        .kpi-label { font-size: 0.8rem; color: var(--text-muted); margin-top: 6px; text-transform: uppercase; letter-spacing: 0.05em; }
         
-        /* Main Grid */
         .grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 24px;
+            gap: 20px;
             margin-bottom: 40px;
         }
         @media (min-width: 768px) { .grid { grid-template-columns: repeat(2, 1fr); } }
         @media (min-width: 1200px) { .grid { grid-template-columns: repeat(3, 1fr); } }
-        @media (min-width: 1400px) { .grid { grid-template-columns: repeat(4, 1fr); } }
-        
-        /* Rocketbook Notes */
-        .note-item {
-            padding: 14px;
-            background: rgba(255,255,255,0.02);
-            border-radius: 12px;
-            margin-bottom: 10px;
-            border-left: 3px solid var(--warning);
-            transition: all 0.2s;
-            text-decoration: none;
-            display: block;
-            color: inherit;
-        }
-        .note-item:hover {
-            background: rgba(255,255,255,0.04);
-            transform: translateX(4px);
-        }
-        .note-title {
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 4px;
-            font-size: 0.95rem;
-        }
-        .note-meta {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            display: flex;
-            gap: 12px;
-        }
-        .note-preview {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            margin-top: 6px;
-            line-height: 1.4;
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
         
         .card {
             background: var(--card-bg);
             border: 1px solid var(--card-border);
-            border-radius: 20px;
-            padding: 28px;
+            border-radius: 16px;
+            padding: 24px;
             backdrop-filter: blur(10px);
             transition: all 0.3s ease;
         }
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px var(--glow);
-        }
+        .card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px var(--glow); }
         .card-header {
             display: flex;
             align-items: center;
-            gap: 14px;
-            margin-bottom: 24px;
-            padding-bottom: 16px;
+            gap: 12px;
+            margin-bottom: 20px;
+            padding-bottom: 14px;
             border-bottom: 1px solid var(--card-border);
         }
         .card-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 14px;
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
         }
-        .card h2 {
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
+        .card h2 { font-size: 1.1rem; font-weight: 700; color: var(--text-primary); }
         
-        /* Projects */
+        /* GitHub Projects */
         .project-item {
-            padding: 16px;
+            padding: 14px;
             background: rgba(255,255,255,0.02);
-            border-radius: 12px;
-            margin-bottom: 12px;
+            border-radius: 10px;
+            margin-bottom: 10px;
             border-left: 3px solid var(--accent-primary);
             transition: all 0.2s;
             text-decoration: none;
             display: block;
             color: inherit;
         }
-        .project-item:hover {
-            background: rgba(255,255,255,0.04);
-            transform: translateX(4px);
-        }
+        .project-item:hover { background: rgba(255,255,255,0.04); transform: translateX(4px); }
         .project-name {
             font-weight: 600;
             color: var(--text-primary);
@@ -278,52 +185,37 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            font-size: 0.95rem;
+        }
+        .project-desc {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            line-height: 1.4;
         }
         .project-meta {
-            font-size: 0.85rem;
+            font-size: 0.75rem;
             color: var(--text-muted);
             display: flex;
-            gap: 16px;
-            margin-top: 8px;
+            gap: 12px;
+            flex-wrap: wrap;
         }
+        .project-meta span { display: flex; align-items: center; gap: 4px; }
         .badge {
             display: inline-flex;
             align-items: center;
             gap: 4px;
-            padding: 4px 10px;
+            padding: 3px 8px;
             border-radius: 20px;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             font-weight: 500;
         }
         .badge-live { background: rgba(34,197,94,0.15); color: var(--success); }
         .badge-active { background: rgba(59,130,246,0.15); color: var(--info); }
-        .badge-recent { background: rgba(139,92,246,0.15); color: var(--accent-secondary); }
-        
-        /* Tags */
-        .tags-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        .tag {
-            padding: 8px 16px;
-            background: linear-gradient(135deg, rgba(99,102,241,0.1), rgba(139,92,246,0.1));
-            border: 1px solid rgba(99,102,241,0.2);
-            border-radius: 25px;
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-            transition: all 0.2s;
-            cursor: default;
-        }
-        .tag:hover {
-            transform: scale(1.05);
-            background: linear-gradient(135deg, rgba(99,102,241,0.2), rgba(139,92,246,0.2));
-            color: var(--text-primary);
-        }
         
         /* News */
         .news-item {
-            padding: 16px 0;
+            padding: 14px 0;
             border-bottom: 1px solid var(--card-border);
         }
         .news-item:last-child { border-bottom: none; }
@@ -333,38 +225,107 @@
             display: block;
             transition: all 0.2s;
         }
-        .news-link:hover .news-title {
-            color: var(--accent-primary);
-        }
+        .news-link:hover .news-title { color: var(--accent-primary); }
         .news-title {
             font-weight: 500;
             color: var(--text-primary);
             margin-bottom: 6px;
-            line-height: 1.5;
-            font-size: 0.95rem;
+            line-height: 1.4;
+            font-size: 0.9rem;
             transition: color 0.2s;
         }
-        .news-source {
-            font-size: 0.8rem;
+        .news-meta {
+            font-size: 0.75rem;
             color: var(--text-muted);
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+            flex-wrap: wrap;
         }
-        .news-dot {
-            width: 6px;
-            height: 6px;
-            background: var(--accent-primary);
-            border-radius: 50%;
-        }
+        .news-date { color: var(--accent-secondary); }
+        .news-source { display: flex; align-items: center; gap: 6px; }
+        .news-dot { width: 5px; height: 5px; background: var(--accent-primary); border-radius: 50%; }
         
-        /* Footer */
-        footer {
+        /* Rocketbook */
+        .rocketbook-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 12px;
+        }
+        .rocketbook-item {
+            background: rgba(255,255,255,0.02);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        .rocketbook-item:hover {
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 10px 30px var(--glow);
+            border-color: var(--accent-primary);
+        }
+        .rocketbook-thumb {
+            aspect-ratio: 3/4;
+            background: linear-gradient(135deg, var(--bg-tertiary), var(--bg-secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            position: relative;
+        }
+        .rocketbook-thumb::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.4));
+        }
+        .rocketbook-info {
+            padding: 12px;
+        }
+        .rocketbook-title {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .rocketbook-date {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+        }
+        .rocketbook-empty {
             text-align: center;
             padding: 40px 20px;
+            color: var(--text-muted);
+        }
+        .rocketbook-empty-icon { font-size: 3rem; margin-bottom: 12px; opacity: 0.5; }
+        
+        /* Tags inline */
+        .tags-inline {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-top: 12px;
+        }
+        .tag-inline {
+            padding: 4px 10px;
+            background: rgba(99,102,241,0.1);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 20px;
             border-top: 1px solid var(--card-border);
             color: var(--text-muted);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
         .footer-brand {
             font-weight: 700;
@@ -373,22 +334,7 @@
             -webkit-text-fill-color: transparent;
         }
         
-        @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.5; }
-        }
-        
-        /* Loading Animation */
-        .loading {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--card-border);
-            border-top-color: var(--accent-primary);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
     </style>
 </head>
 <body>
@@ -398,14 +344,13 @@
         <header>
             <div class="profile-badge">
                 <span class="status-dot"></span>
-                <span>Sviluppatore Web & Tecnico IT</span>
+                <span>Sviluppatore Web & Tecnico IT @ Vinitaly International</span>
             </div>
             <h1>📊 Daily Brief</h1>
             <div class="subtitle">Anselmo Acquah</div>
             <div class="date" id="current-date"></div>
         </header>
 
-        <!-- KPI Section -->
         <section class="kpi-section">
             <div class="kpi-grid">
                 <div class="kpi-card">
@@ -414,24 +359,19 @@
                     <div class="kpi-label">Repository GitHub</div>
                 </div>
                 <div class="kpi-card">
-                    <span class="kpi-icon">⚡</span>
-                    <div class="kpi-value">8</div>
-                    <div class="kpi-label">Aree di Interesse</div>
-                </div>
-                <div class="kpi-card">
                     <span class="kpi-icon">🔥</span>
                     <div class="kpi-value">5</div>
-                    <div class="kpi-label">Trending News</div>
-                </div>
-                <div class="kpi-card">
-                    <span class="kpi-icon">🤖</span>
-                    <div class="kpi-value">AI</div>
-                    <div class="kpi-label">Powered Dashboard</div>
+                    <div class="kpi-label">Tech News</div>
                 </div>
                 <div class="kpi-card">
                     <span class="kpi-icon">📓</span>
                     <div class="kpi-value" id="rocketbook-count">0</div>
                     <div class="kpi-label">Note Rocketbook</div>
+                </div>
+                <div class="kpi-card">
+                    <span class="kpi-icon">🤖</span>
+                    <div class="kpi-value">AI</div>
+                    <div class="kpi-label">Powered</div>
                 </div>
             </div>
         </section>
@@ -449,8 +389,10 @@
                         📊 daily-brief-dashboard
                         <span class="badge badge-live">● Live</span>
                     </div>
+                    <div class="project-desc">Dashboard personale AI-powered con GitHub API, news e tema dark/light</div>
                     <div class="project-meta">
-                        <span>⏱️ Ultimo: oggi</span>
+                        <span>⭐ HTML/CSS/JS</span>
+                        <span>🔄 Oggi</span>
                         <span>🌐 GitHub Pages</span>
                     </div>
                 </a>
@@ -460,28 +402,23 @@
                         📁 files
                         <span class="badge badge-active">● Active</span>
                     </div>
+                    <div class="project-desc">Utility di storage e gestione file</div>
                     <div class="project-meta">
-                        <span>⏱️ Ultimo: 17 Feb</span>
-                        <span>📦 Storage utility</span>
+                        <span>⭐ CSS</span>
+                        <span>🔄 17 Feb</span>
+                        <span>📦 Storage</span>
                     </div>
                 </a>
-            </div>
-
-            <!-- Interests -->
-            <div class="card">
-                <div class="card-header">
-                    <div class="card-icon">💡</div>
-                    <h2>Interessi & Focus</h2>
-                </div>
-                <div class="tags-container">
-                    <span class="tag">🤖 AI Agents</span>
-                    <span class="tag">⚡ Automazione</span>
-                    <span class="tag">🔧 MCP Protocol</span>
-                    <span class="tag">💬 Bot Development</span>
-                    <span class="tag">☁️ Cloud Systems</span>
-                    <span class="tag">📱 Messaging APIs</span>
-                    <span class="tag">🔒 Privacy Tech</span>
-                    <span class="tag">🚀 DevOps</span>
+                
+                <div class="tags-inline">
+                    <span class="tag-inline">🤖 AI Agents</span>
+                    <span class="tag-inline">⚡ Automazione</span>
+                    <span class="tag-inline">🔧 MCP</span>
+                    <span class="tag-inline">💬 Bot Dev</span>
+                    <span class="tag-inline">☁️ Cloud</span>
+                    <span class="tag-inline">📱 APIs</span>
+                    <span class="tag-inline">🔒 Privacy</span>
+                    <span class="tag-inline">🚀 DevOps</span>
                 </div>
             </div>
 
@@ -493,51 +430,51 @@
                 </div>
                 
                 <div class="news-item">
-                    <a href="https://developer.wordpress.org/news/2025/11/wordpress-mcp-server/" target="_blank" class="news-link">
-                        <div class="news-title">WordPress MCP Adapter ufficiale - AI Agents integration</div>
-                        <div class="news-source">
-                            <span class="news-dot"></span>
-                            developer.wordpress.org
+                    <a href="https://developer.wordpress.org/news/2026/02/from-abilities-to-ai-agents-introducing-the-wordpress-mcp-adapter/" target="_blank" class="news-link">
+                        <div class="news-title">WordPress MCP Adapter ufficiale - From Abilities to AI Agents</div>
+                        <div class="news-meta">
+                            <span class="news-date">4 Feb 2026</span>
+                            <span class="news-source"><span class="news-dot"></span>developer.wordpress.org</span>
                         </div>
                     </a>
                 </div>
                 
                 <div class="news-item">
-                    <a href="https://www.365i.co.uk/2026/02/19/wordpress-7-0-beta-ai-core/" target="_blank" class="news-link">
-                        <div class="news-title">WordPress 7.0 Beta con AI built into core (19 Feb)</div>
-                        <div class="news-source">
-                            <span class="news-dot"></span>
-                            365i.co.uk
+                    <a href="https://www.365i.co.uk/blog/2026/02/08/wordpress-7-beta-february-ai-agents-collaboration/" target="_blank" class="news-link">
+                        <div class="news-title">WordPress 7.0 Beta arriva il 19 Feb con AI integrata nel core</div>
+                        <div class="news-meta">
+                            <span class="news-date">8 Feb 2026</span>
+                            <span class="news-source"><span class="news-dot"></span>365i.co.uk</span>
                         </div>
                     </a>
                 </div>
                 
                 <div class="news-item">
-                    <a href="https://startuphub.ai/2026/02/wordpress-com-mcp-server/" target="_blank" class="news-link">
-                        <div class="news-title">WordPress.com lancia MCP server nativo per AI agents</div>
-                        <div class="news-source">
-                            <span class="news-dot"></span>
-                            startuphub.ai
+                    <a href="https://developer.wordpress.com/docs/mcp/" target="_blank" class="news-link">
+                        <div class="news-title">WordPress.com MCP Server - Documentazione ufficiale</div>
+                        <div class="news-meta">
+                            <span class="news-date">2026</span>
+                            <span class="news-source"><span class="news-dot"></span>developer.wordpress.com</span>
                         </div>
                     </a>
                 </div>
                 
                 <div class="news-item">
-                    <a href="https://flowmattic.com/mcp-workflow-automation/" target="_blank" class="news-link">
-                        <div class="news-title">FlowMattic MCP: Workflow automation per WordPress</div>
-                        <div class="news-source">
-                            <span class="news-dot"></span>
-                            flowmattic.com
+                    <a href="https://flowmattic.com/mcp/" target="_blank" class="news-link">
+                        <div class="news-title">FlowMattic MCP - WordPress AI Integration & Automation</div>
+                        <div class="news-meta">
+                            <span class="news-date">2026</span>
+                            <span class="news-source"><span class="news-dot"></span>flowmattic.com</span>
                         </div>
                     </a>
                 </div>
                 
                 <div class="news-item">
-                    <a href="https://woocommerce.com/document/mcp-integration/" target="_blank" class="news-link">
-                        <div class="news-title">WooCommerce MCP integration: ordini, prodotti, clienti</div>
-                        <div class="news-source">
-                            <span class="news-dot"></span>
-                            woocommerce.com
+                    <a href="https://developer.woocommerce.com/docs/features/mcp/" target="_blank" class="news-link">
+                        <div class="news-title">WooCommerce MCP Integration - Documentazione ufficiale</div>
+                        <div class="news-meta">
+                            <span class="news-date">2026</span>
+                            <span class="news-source"><span class="news-dot"></span>developer.woocommerce.com</span>
                         </div>
                     </a>
                 </div>
@@ -550,42 +487,19 @@
                     <h2>Note Rocketbook</h2>
                 </div>
                 
-                <a href="#" class="note-item" data-note="1">
-                    <div class="note-title">📝 Idea Dashboard AI</div>
-                    <div class="note-meta">
-                        <span>📅 Oggi</span>
-                        <span>📎 Scansione PDF</span>
+                <div id="rocketbook-container">
+                    <div class="rocketbook-empty">
+                        <div class="rocketbook-empty-icon">📭</div>
+                        <div>Nessuna scansione recente</div>
+                        <div style="font-size: 0.8rem; margin-top: 8px;">Le note da Anselmo Acquah via Rocketbook appariranno qui</div>
                     </div>
-                    <div class="note-preview">Dashboard con GitHub API, Perplexity news, tema dark/light...</div>
-                </a>
-                
-                <a href="#" class="note-item" data-note="2">
-                    <div class="note-title">🔧 MCP Protocol Notes</div>
-                    <div class="note-meta">
-                        <span>📅 Ieri</span>
-                        <span>📎 Scansione PDF</span>
-                    </div>
-                    <div class="note-preview">WordPress MCP adapter, FlowMattic integration, WooCommerce...</div>
-                </a>
-                
-                <a href="#" class="note-item" data-note="3">
-                    <div class="note-title">⚡ Automazione Workflow</div>
-                    <div class="note-meta">
-                        <span>📅 16 Feb</span>
-                        <span>📎 Scansione PDF</span>
-                    </div>
-                    <div class="note-preview">Zapier MCP, Make.com, n8n - confronto strumenti...</div>
-                </a>
+                </div>
             </div>
         </div>
 
         <footer>
-            <p>
-                🤖 Generato da <span class="footer-brand">OpenClaw AI</span>
-            </p>
-            <p style="margin-top: 8px; font-size: 0.85rem;">
-                Ultimo aggiornamento: <span id="last-updated"></span>
-            </p>
+            <p>🤖 Generato da <span class="footer-brand">OpenClaw AI</span></p>
+            <p style="margin-top: 6px; font-size: 0.8rem;">Ultimo aggiornamento: <span id="last-updated"></span></p>
         </footer>
     </div>
 
@@ -602,7 +516,6 @@
             localStorage.setItem('theme', newTheme);
         });
         
-        // Load saved theme
         const savedTheme = localStorage.getItem('theme') || 'dark';
         html.setAttribute('data-theme', savedTheme);
         themeToggle.textContent = savedTheme === 'dark' ? '🌙' : '☀️';
@@ -610,23 +523,43 @@
         // Update dates
         function updateDates() {
             const now = new Date();
-            const options = { 
-                weekday: 'long', 
-                year: 'numeric', 
-                month: 'long', 
-                day: 'numeric' 
-            };
             document.getElementById('current-date').textContent = 
-                now.toLocaleDateString('it-IT', options);
+                now.toLocaleDateString('it-IT', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
             document.getElementById('last-updated').textContent = 
                 now.toLocaleString('it-IT');
         }
-        
         updateDates();
         
-        // Rocketbook notes counter
-        const noteItems = document.querySelectorAll('.note-item');
-        document.getElementById('rocketbook-count').textContent = noteItems.length;
+        // Rocketbook notes loader
+        // TODO: Integrare con Gmail API per recuperare scansioni da notes@email.getrocketbook.com
+        const rocketbookNotes = []; // Array vuoto - verrà popolato da API
+        document.getElementById('rocketbook-count').textContent = rocketbookNotes.length;
+        
+        // Funzione per renderizzare note Rocketbook quando disponibili
+        function renderRocketbookNotes(notes) {
+            const container = document.getElementById('rocketbook-container');
+            if (notes.length === 0) return;
+            
+            container.innerHTML = '<div class="rocketbook-grid">' + 
+                notes.map(note => `
+                    <a href="${note.pdfUrl || '#' }" target="_blank" class="rocketbook-item">
+                        <div class="rocketbook-thumb">📝</div>
+                        <div class="rocketbook-info">
+                            <div class="rocketbook-title">${note.title || 'Nota senza titolo'}</div>
+                            <div class="rocketbook-date">${note.date || 'Data sconosciuta'}</div>
+                        </div>
+                    </a>
+                `).join('') + 
+            '</div>';
+            
+            document.getElementById('rocketbook-count').textContent = notes.length;
+        }
+        
+        // Esempio di struttura dati attesa da Gmail API:
+        // renderRocketbookNotes([
+        //     { title: "Idea Dashboard", date: "17 Feb 2026", pdfUrl: "https://drive.google.com/..." },
+        //     { title: "MCP Notes", date: "16 Feb 2026", pdfUrl: "https://drive.google.com/..." }
+        // ]);
     </script>
 </body>
 </html>
