@@ -282,6 +282,17 @@
             inset: 0;
             background: linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.4));
         }
+        .rocketbook-tag {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: rgba(99,102,241,0.9);
+            color: white;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 0.65rem;
+            font-weight: 500;
+        }
         .rocketbook-info {
             padding: 12px;
         }
@@ -298,12 +309,28 @@
             font-size: 0.7rem;
             color: var(--text-muted);
         }
+        .rocketbook-preview {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            margin-top: 6px;
+            line-height: 1.3;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
         .rocketbook-empty {
             text-align: center;
             padding: 40px 20px;
             color: var(--text-muted);
         }
         .rocketbook-empty-icon { font-size: 3rem; margin-bottom: 12px; opacity: 0.5; }
+        .loading-notes {
+            text-align: center;
+            padding: 30px;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
         
         /* Tags inline */
         .tags-inline {
@@ -488,16 +515,8 @@
                 </div>
                 
                 <div id="rocketbook-container">
-            <div class="rocketbook-grid">
-            <a href="#" target="_blank" class="rocketbook-item">
-                <div class="rocketbook-thumb">📝</div>
-                <div class="rocketbook-info">
-                    <div class="rocketbook-title">Dashboard Ideas</div>
-                    <div class="rocketbook-date">17 Feb 2026</div>
+                    <div class="loading-notes">Caricamento note...</div>
                 </div>
-            </a>
-            </div>
-</div>
             </div>
         </div>
 
@@ -534,28 +553,52 @@
         }
         updateDates();
         
-        // Rocketbook notes loader
-        const rocketbookNotes = [
-            { title: "Dashboard Ideas", date: "17 Feb 2026", pdfUrl: "https://drive.google.com/file/d/example1/view", hasPdf: true },
-            { title: "MCP Protocol Notes", date: "16 Feb 2026", pdfUrl: "https://drive.google.com/file/d/example2/view", hasPdf: true },
-            { title: "Workflow Automation", date: "15 Feb 2026", pdfUrl: "https://drive.google.com/file/d/example3/view", hasPdf: true }
-        ];
+        // Rocketbook notes loader - carica da JSON esterno
+        async function loadRocketbookNotes() {
+            try {
+                const response = await fetch('rocketbook_notes.json');
+                const notes = await response.json();
+                renderRocketbookNotes(notes);
+            } catch (e) {
+                console.log('Caricamento note fallito:', e);
+                document.getElementById('rocketbook-container').innerHTML = `
+                    <div class="rocketbook-empty">
+                        <div class="rocketbook-empty-icon">📭</div>
+                        <div>Nessuna scansione trovata</div>
+                        <div style="font-size: 0.8rem; margin-top: 8px;">Configura Gmail per sincronizzare le note</div>
+                    </div>
+                `;
+            }
+        }
         
-        document.getElementById('rocketbook-count').textContent = rocketbookNotes.length;
-        renderRocketbookNotes(rocketbookNotes);
+        loadRocketbookNotes();
         
-        // Funzione per renderizzare note Rocketbook quando disponibili
+        // Funzione per renderizzare note Rocketbook
         function renderRocketbookNotes(notes) {
             const container = document.getElementById('rocketbook-container');
-            if (notes.length === 0) return;
+            if (!notes || notes.length === 0) {
+                container.innerHTML = `
+                    <div class="rocketbook-empty">
+                        <div class="rocketbook-empty-icon">📭</div>
+                        <div>Nessuna scansione trovata</div>
+                        <div style="font-size: 0.8rem; margin-top: 8px;">Configura Gmail per sincronizzare le note</div>
+                    </div>
+                `;
+                document.getElementById('rocketbook-count').textContent = '0';
+                return;
+            }
             
             container.innerHTML = '<div class="rocketbook-grid">' + 
                 notes.map(note => `
                     <a href="${note.pdfUrl || '#' }" target="_blank" class="rocketbook-item">
-                        <div class="rocketbook-thumb">📝</div>
+                        <div class="rocketbook-thumb">
+                            ${note.preview ? '📄' : '📝'}
+                            ${note.tags ? `<span class="rocketbook-tag">${note.tags[0]}</span>` : ''}
+                        </div>
                         <div class="rocketbook-info">
                             <div class="rocketbook-title">${note.title || 'Nota senza titolo'}</div>
                             <div class="rocketbook-date">${note.date || 'Data sconosciuta'}</div>
+                            ${note.preview ? `<div class="rocketbook-preview">${note.preview}</div>` : ''}
                         </div>
                     </a>
                 `).join('') + 
