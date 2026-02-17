@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="it" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,6 +15,7 @@
             --card-bg: rgba(255,255,255,0.03);
             --card-border: rgba(255,255,255,0.08);
             --card-hover: rgba(255,255,255,0.05);
+            --shadow: rgba(0,0,0,0.3);
         }
         [data-theme="light"] {
             --bg-primary: #f8fafc;
@@ -23,85 +24,212 @@
             --text-primary: #1e293b;
             --text-secondary: #64748b;
             --text-muted: #94a3b8;
-            --card-bg: rgba(255,255,255,0.8);
+            --card-bg: rgba(255,255,255,0.9);
             --card-border: rgba(0,0,0,0.08);
-            --card-hover: rgba(0,0,0,0.02);
+            --card-hover: rgba(0,0,0,0.03);
+            --shadow: rgba(0,0,0,0.1);
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-tertiary) 100%); color: var(--text-primary); min-height: 100vh; padding: 20px; transition: all 0.3s ease; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-tertiary) 100%); 
+            color: var(--text-primary); 
+            min-height: 100vh; 
+            padding: 20px;
+            transition: all 0.3s ease;
+        }
         .container { max-width: 1400px; margin: 0 auto; }
-        header { text-align: center; padding: 40px 0; border-bottom: 1px solid rgba(255,255,255,0.1); margin-bottom: 40px; }
-        h1 { font-size: 3rem; font-weight: 700; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; }
+        
+        /* Header */
+        header { text-align: center; padding: 40px 0; border-bottom: 1px solid var(--card-border); margin-bottom: 40px; }
+        h1 { 
+            font-size: clamp(2rem, 5vw, 3rem); 
+            font-weight: 700; 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            margin-bottom: 10px; 
+        }
         .date { color: var(--text-secondary); font-size: 1.1rem; }
         .greeting { margin-top: 15px; font-size: 1.3rem; color: #22d3ee; }
         
         /* Theme Toggle */
-        .theme-toggle { position: fixed; top: 20px; right: 20px; z-index: 1000; background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 50px; padding: 8px 16px; cursor: pointer; display: flex; align-items: center; gap: 8px; font-size: 1.2rem; transition: all 0.3s ease; }
-        .theme-toggle:hover { transform: scale(1.05); box-shadow: 0 4px 12px rgba(0,0,0,0.2); }
+        .theme-toggle { 
+            position: fixed; 
+            top: 20px; 
+            right: 20px; 
+            z-index: 1000; 
+            background: var(--card-bg); 
+            border: 1px solid var(--card-border); 
+            border-radius: 50px; 
+            padding: 10px 18px; 
+            cursor: pointer; 
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        .theme-toggle:hover { transform: scale(1.1); box-shadow: 0 4px 20px var(--shadow); }
         
-        /* KPI Cards */
+        /* KPI Section */
         .kpi-section { margin-bottom: 40px; }
-        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
-        .kpi-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; text-align: center; position: relative; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        .kpi-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+        .kpi-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
+            gap: 20px; 
+        }
+        @media (min-width: 768px) { .kpi-grid { grid-template-columns: repeat(4, 1fr); } }
+        
+        .kpi-card { 
+            background: var(--card-bg); 
+            border: 1px solid var(--card-border); 
+            border-radius: 16px; 
+            padding: 24px; 
+            text-align: center; 
+            position: relative; 
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+        }
+        .kpi-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px var(--shadow); }
         .kpi-card.live { border-left: 4px solid #ef4444; }
         .kpi-card.active { border-left: 4px solid #22c55e; }
         .kpi-card.testing { border-left: 4px solid #eab308; }
         .kpi-card.total { border-left: 4px solid #667eea; }
-        .kpi-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; margin-bottom: 12px; }
+        
+        .kpi-badge { 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 6px; 
+            padding: 6px 12px; 
+            border-radius: 20px; 
+            font-size: 0.75rem; 
+            font-weight: 600; 
+            text-transform: uppercase; 
+            margin-bottom: 12px; 
+        }
         .kpi-card.live .kpi-badge { background: rgba(239,68,68,0.2); color: #ef4444; }
         .kpi-card.active .kpi-badge { background: rgba(34,197,94,0.2); color: #22c55e; }
         .kpi-card.testing .kpi-badge { background: rgba(234,179,8,0.2); color: #eab308; }
         .kpi-card.total .kpi-badge { background: rgba(102,126,234,0.2); color: #667eea; }
-        .kpi-value { font-size: 3rem; font-weight: 700; color: #f4f4f5; line-height: 1; font-variant-numeric: tabular-nums; }
-        .kpi-label { font-size: 0.9rem; color: #a1a1aa; margin-top: 8px; }
-        .kpi-indicator { position: absolute; top: 16px; right: 16px; width: 8px; height: 8px; border-radius: 50%; animation: pulse 1.5s ease-in-out infinite; }
+        
+        .kpi-value { 
+            font-size: clamp(2rem, 4vw, 3rem); 
+            font-weight: 700; 
+            color: var(--text-primary); 
+            line-height: 1; 
+            font-variant-numeric: tabular-nums; 
+        }
+        .kpi-label { font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px; }
+        .kpi-indicator { 
+            position: absolute; 
+            top: 16px; 
+            right: 16px; 
+            width: 8px; 
+            height: 8px; 
+            border-radius: 50%; 
+            animation: pulse 1.5s ease-in-out infinite; 
+        }
         .kpi-card.live .kpi-indicator { background: #ef4444; }
         .kpi-card.active .kpi-indicator { background: #22c55e; }
         .kpi-card.testing .kpi-indicator { background: #eab308; }
         .kpi-card.total .kpi-indicator { background: #667eea; }
         @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
         
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 25px; margin-bottom: 30px; }
-        .card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 28px; backdrop-filter: blur(10px); transition: transform 0.3s, box-shadow 0.3s; }
-        .card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
-        .card-header { display: flex; align-items: center; margin-bottom: 20px; padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); }
-        .icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; margin-right: 15px; }
+        /* Main Grid */
+        .grid { 
+            display: grid; 
+            grid-template-columns: 1fr; 
+            gap: 25px; 
+            margin-bottom: 30px; 
+        }
+        @media (min-width: 768px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+        @media (min-width: 1200px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+        
+        .card { 
+            background: var(--card-bg); 
+            border: 1px solid var(--card-border); 
+            border-radius: 16px; 
+            padding: 28px; 
+            backdrop-filter: blur(10px); 
+            transition: all 0.3s ease;
+        }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px var(--shadow); }
+        .card-header { 
+            display: flex; 
+            align-items: center; 
+            margin-bottom: 20px; 
+            padding-bottom: 15px; 
+            border-bottom: 1px solid var(--card-border); 
+        }
+        .icon { 
+            width: 44px; 
+            height: 44px; 
+            border-radius: 12px; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-size: 1.5rem; 
+            margin-right: 15px; 
+        }
         .github .icon { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
         .interests .icon { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
         .news .icon { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
-        .card h2 { font-size: 1.3rem; font-weight: 600; color: #f4f4f5; }
-        .repo-item { padding: 15px; background: rgba(255,255,255,0.02); border-radius: 10px; margin-bottom: 12px; border-left: 3px solid; transition: all 0.2s; }
-        .repo-item:hover { background: rgba(255,255,255,0.05); }
+        .card h2 { font-size: 1.3rem; font-weight: 600; color: var(--text-primary); }
+        
+        .repo-item { 
+            padding: 15px; 
+            background: var(--card-hover); 
+            border-radius: 10px; 
+            margin-bottom: 12px; 
+            border-left: 3px solid; 
+            transition: all 0.2s; 
+        }
+        .repo-item:hover { background: var(--card-hover); filter: brightness(1.1); }
         .repo-item.live { border-left-color: #ef4444; }
         .repo-item.active { border-left-color: #22c55e; }
         .repo-item.testing { border-left-color: #eab308; }
-        .repo-name { font-weight: 600; color: #f4f4f5; margin-bottom: 5px; }
-        .repo-desc { font-size: 0.9rem; color: #a1a1aa; margin-bottom: 8px; }
-        .repo-meta { display: flex; gap: 15px; font-size: 0.8rem; color: #71717a; }
-        .tag { display: inline-block; padding: 6px 14px; background: rgba(79, 172, 254, 0.15); border: 1px solid rgba(79, 172, 254, 0.3); border-radius: 20px; font-size: 0.85rem; margin: 5px; color: #4facfe; }
-        .news-item { padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,0.05); }
+        .repo-name { font-weight: 600; color: var(--text-primary); margin-bottom: 5px; }
+        .repo-desc { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 8px; }
+        .repo-meta { display: flex; gap: 15px; font-size: 0.8rem; color: var(--text-muted); }
+        
+        .tag { 
+            display: inline-block; 
+            padding: 6px 14px; 
+            background: rgba(79, 172, 254, 0.15); 
+            border: 1px solid rgba(79, 172, 254, 0.3); 
+            border-radius: 20px; 
+            font-size: 0.85rem; 
+            margin: 5px; 
+            color: #4facfe; 
+            transition: all 0.2s;
+        }
+        .tag:hover { transform: scale(1.05); background: rgba(79, 172, 254, 0.25); }
+        
+        .news-item { padding: 14px 0; border-bottom: 1px solid var(--card-border); }
         .news-item:last-child { border-bottom: none; }
-        .news-title { font-weight: 500; color: #f4f4f5; margin-bottom: 6px; line-height: 1.4; }
-        .news-source { font-size: 0.8rem; color: #71717a; }
-        footer { text-align: center; padding: 30px; color: #71717a; font-size: 0.9rem; }
-        .highlight { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 600; }
-        @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } h1 { font-size: 2rem; } .kpi-grid { grid-template-columns: repeat(2, 1fr); } }
+        .news-title { font-weight: 500; color: var(--text-primary); margin-bottom: 6px; line-height: 1.4; }
+        .news-source { font-size: 0.8rem; color: var(--text-muted); }
+        
+        footer { text-align: center; padding: 30px; color: var(--text-muted); font-size: 0.9rem; }
+        .highlight { 
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
+            -webkit-background-clip: text; 
+            -webkit-text-fill-color: transparent; 
+            font-weight: 600; 
+        }
     </style>
 </head>
 <body>
+    <button class="theme-toggle" id="themeToggle" aria-label="Cambia tema">🌙</button>
+
     <div class="container">
         <header>
             <h1>📊 Daily Brief</h1>
-            <div class="date" id="current-date">Martedì 17 Febbraio 2026</div>
+            <div class="date" id="current-date"></div>
             <div class="greeting">Buongiorno Anselmo! Ecco il tuo riepilogo giornaliero</div>
         </header>
 
-        <!-- KPI Section -->
         <section class="kpi-section">
-            <div class="kpi-grid" id="kpi-container">
-                <!-- KPI Cards generate dinamicamente -->
-            </div>
+            <div class="kpi-grid" id="kpi-container"></div>
         </section>
 
         <div class="grid">
@@ -110,16 +238,15 @@
                     <div class="icon">🚀</div>
                     <h2>Progetti GitHub</h2>
                 </div>
-                <div id="projects-list">
-                    <!-- Progetti ordinati dinamicamente -->
-                </div>
+                <div id="projects-list"></div>
             </div>
+            
             <div class="card interests">
                 <div class="card-header">
                     <div class="icon">💡</div>
                     <h2>Interessi & Focus</h2>
                 </div>
-                <div style="margin-bottom: 20px;">
+                <div>
                     <span class="tag">🤖 AI Agents</span>
                     <span class="tag">⚡ Automazione</span>
                     <span class="tag">🔧 MCP Protocol</span>
@@ -130,6 +257,7 @@
                     <span class="tag">🚀 DevOps</span>
                 </div>
             </div>
+            
             <div class="card news">
                 <div class="card-header">
                     <div class="icon">📰</div>
@@ -153,52 +281,51 @@
                 </div>
             </div>
         </div>
+        
         <footer>
-            <p>🤖 Generato automaticamente da <span class="highlight">OpenClaw AI</span> • <a href="https://openclaw.ai" style="color: #667eea;">openclaw.ai</a></p>
-            <p style="margin-top: 10px; font-size: 0.8rem;">Prossimo aggiornamento: Domani 09:00 CET</p>
+            <p>🤖 Generato da <span class="highlight">OpenClaw AI</span> • <a href="https://openclaw.ai" style="color: #667eea;">openclaw.ai</a></p>
+            <p style="margin-top: 10px; font-size: 0.8rem;">Aggiornato: <span id="last-updated"></span></p>
         </footer>
     </div>
 
     <script>
-        // Dati progetti
         const projectsData = [
-            { name: 'openclaw-mcp-integration', desc: 'Integrazione MCP con OpenClaw per automazione AI', status: 'live', updated: 'Oggi' },
-            { name: 'discord-bot-agent', desc: 'Bot Discord connesso ad AI assistant', status: 'active', updated: '2h fa' },
-            { name: 'telegram-ai-bridge', desc: 'Bridge Telegram per automazione messaggi', status: 'testing', updated: 'Ieri' },
-            { name: 'wordpress-divi-automation', desc: 'Automazione workflow WordPress/Divi', status: 'active', updated: '3h fa' },
-            { name: 'make-webhook-handler', desc: 'Handler webhook per Make.com', status: 'live', updated: 'Oggi' },
-            { name: 'ai-agent-dashboard', desc: 'Dashboard monitoring AI agents', status: 'testing', updated: '2 giorni fa' }
+            { name: 'openclaw-mcp-integration', desc: 'Integrazione MCP con OpenClaw', status: 'live', updated: 'Oggi' },
+            { name: 'discord-bot-agent', desc: 'Bot Discord con AI assistant', status: 'active', updated: '2h fa' },
+            { name: 'telegram-ai-bridge', desc: 'Bridge Telegram per automazione', status: 'testing', updated: 'Ieri' },
+            { name: 'wordpress-divi-automation', desc: 'Automazione WordPress/Divi', status: 'active', updated: '3h fa' },
+            { name: 'make-webhook-handler', desc: 'Handler webhook Make.com', status: 'live', updated: 'Oggi' },
+            { name: 'ai-agent-dashboard', desc: 'Dashboard monitoring AI', status: 'testing', updated: '2 giorni fa' }
         ];
 
-        // Conta progetti per stato
-        function countByStatus(projects) {
-            const counts = { live: 0, active: 0, testing: 0, total: 0 };
-            projects.forEach(p => { counts[p.status]++; counts.total++; });
-            return counts;
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const html = document.documentElement;
+        
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            html.setAttribute('data-theme', newTheme);
+            themeToggle.textContent = newTheme === 'dark' ? '🌙' : '☀️';
+            localStorage.setItem('theme', newTheme);
+        });
+        
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'dark';
+        html.setAttribute('data-theme', savedTheme);
+        themeToggle.textContent = savedTheme === 'dark' ? '🌙' : '☀️';
+
+        // Date
+        function updateDate() {
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('current-date').textContent = new Date().toLocaleDateString('it-IT', options);
+            document.getElementById('last-updated').textContent = new Date().toLocaleString('it-IT');
         }
 
-        // Anima contatore
-        function animateCounter(element, target, duration = 1000) {
-            const startTime = performance.now();
-            function update(currentTime) {
-                const progress = Math.min((currentTime - startTime) / duration, 1);
-                const easeOut = 1 - Math.pow(1 - progress, 3);
-                element.textContent = Math.floor(target * easeOut);
-                if (progress < 1) requestAnimationFrame(update);
-            }
-            requestAnimationFrame(update);
-        }
-
-        // Ordina progetti per stato
-        function sortProjectsByStatus(projects) {
-            const priority = { live: 0, active: 1, testing: 2 };
-            return [...projects].sort((a, b) => priority[a.status] - priority[b.status] || a.name.localeCompare(b.name));
-        }
-
-        // Genera KPI Cards
+        // KPI Cards
         function generateKPICards() {
-            const counts = countByStatus(projectsData);
-            const kpiContainer = document.getElementById('kpi-container');
+            const counts = { live: 0, active: 0, testing: 0, total: 0 };
+            projectsData.forEach(p => { counts[p.status]++; counts.total++; });
             
             const kpiData = [
                 { status: 'live', label: 'Live', value: counts.live, icon: '🔴' },
@@ -207,51 +334,43 @@
                 { status: 'total', label: 'Totale', value: counts.total, icon: '📊' }
             ];
 
+            const container = document.getElementById('kpi-container');
             kpiData.forEach(kpi => {
                 const card = document.createElement('div');
                 card.className = `kpi-card ${kpi.status}`;
                 card.innerHTML = `
                     <div class="kpi-indicator"></div>
                     <div class="kpi-badge">${kpi.icon} ${kpi.label}</div>
-                    <div class="kpi-value" data-target="${kpi.value}">0</div>
+                    <div class="kpi-value">${kpi.value}</div>
                     <div class="kpi-label">progetti</div>
                 `;
-                kpiContainer.appendChild(card);
-                
-                // Anima il contatore
-                const valueEl = card.querySelector('.kpi-value');
-                animateCounter(valueEl, kpi.value);
+                container.appendChild(card);
             });
         }
 
-        // Genera lista progetti
+        // Projects List
         function generateProjectsList() {
-            const sortedProjects = sortProjectsByStatus(projectsData);
-            const projectsList = document.getElementById('projects-list');
+            const priority = { live: 0, active: 1, testing: 2 };
+            const sorted = [...projectsData].sort((a, b) => priority[a.status] - priority[b.status]);
             
-            sortedProjects.forEach(project => {
+            const container = document.getElementById('projects-list');
+            sorted.forEach(project => {
                 const item = document.createElement('div');
                 item.className = `repo-item ${project.status}`;
+                const statusIcon = project.status === 'live' ? '🔴' : project.status === 'active' ? '🟢' : '🟡';
                 item.innerHTML = `
                     <div class="repo-name">${project.name}</div>
                     <div class="repo-desc">${project.desc}</div>
                     <div class="repo-meta">
-                        <span>${project.status === 'live' ? '🔴' : project.status === 'active' ? '🟢' : '🟡'} ${project.status.charAt(0).toUpperCase() + project.status.slice(1)}</span>
+                        <span>${statusIcon} ${project.status}</span>
                         <span>⏱️ ${project.updated}</span>
                     </div>
                 `;
-                projectsList.appendChild(item);
+                container.appendChild(item);
             });
         }
 
-        // Aggiorna data
-        function updateDate() {
-            const dateEl = document.getElementById('current-date');
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            dateEl.textContent = new Date().toLocaleDateString('it-IT', options);
-        }
-
-        // Inizializza
+        // Init
         document.addEventListener('DOMContentLoaded', () => {
             updateDate();
             generateKPICards();
