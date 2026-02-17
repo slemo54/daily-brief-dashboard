@@ -12,6 +12,30 @@
         h1 { font-size: 3rem; font-weight: 700; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; }
         .date { color: #a1a1aa; font-size: 1.1rem; }
         .greeting { margin-top: 15px; font-size: 1.3rem; color: #22d3ee; }
+        
+        /* KPI Cards */
+        .kpi-section { margin-bottom: 40px; }
+        .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+        .kpi-card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 24px; text-align: center; position: relative; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .kpi-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+        .kpi-card.live { border-left: 4px solid #ef4444; }
+        .kpi-card.active { border-left: 4px solid #22c55e; }
+        .kpi-card.testing { border-left: 4px solid #eab308; }
+        .kpi-card.total { border-left: 4px solid #667eea; }
+        .kpi-badge { display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; text-transform: uppercase; margin-bottom: 12px; }
+        .kpi-card.live .kpi-badge { background: rgba(239,68,68,0.2); color: #ef4444; }
+        .kpi-card.active .kpi-badge { background: rgba(34,197,94,0.2); color: #22c55e; }
+        .kpi-card.testing .kpi-badge { background: rgba(234,179,8,0.2); color: #eab308; }
+        .kpi-card.total .kpi-badge { background: rgba(102,126,234,0.2); color: #667eea; }
+        .kpi-value { font-size: 3rem; font-weight: 700; color: #f4f4f5; line-height: 1; font-variant-numeric: tabular-nums; }
+        .kpi-label { font-size: 0.9rem; color: #a1a1aa; margin-top: 8px; }
+        .kpi-indicator { position: absolute; top: 16px; right: 16px; width: 8px; height: 8px; border-radius: 50%; animation: pulse 1.5s ease-in-out infinite; }
+        .kpi-card.live .kpi-indicator { background: #ef4444; }
+        .kpi-card.active .kpi-indicator { background: #22c55e; }
+        .kpi-card.testing .kpi-indicator { background: #eab308; }
+        .kpi-card.total .kpi-indicator { background: #667eea; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        
         .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 25px; margin-bottom: 30px; }
         .card { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); border-radius: 16px; padding: 28px; backdrop-filter: blur(10px); transition: transform 0.3s, box-shadow 0.3s; }
         .card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
@@ -21,7 +45,11 @@
         .interests .icon { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
         .news .icon { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
         .card h2 { font-size: 1.3rem; font-weight: 600; color: #f4f4f5; }
-        .repo-item { padding: 15px; background: rgba(255,255,255,0.02); border-radius: 10px; margin-bottom: 12px; border-left: 3px solid #f5576c; }
+        .repo-item { padding: 15px; background: rgba(255,255,255,0.02); border-radius: 10px; margin-bottom: 12px; border-left: 3px solid; transition: all 0.2s; }
+        .repo-item:hover { background: rgba(255,255,255,0.05); }
+        .repo-item.live { border-left-color: #ef4444; }
+        .repo-item.active { border-left-color: #22c55e; }
+        .repo-item.testing { border-left-color: #eab308; }
         .repo-name { font-weight: 600; color: #f4f4f5; margin-bottom: 5px; }
         .repo-desc { font-size: 0.9rem; color: #a1a1aa; margin-bottom: 8px; }
         .repo-meta { display: flex; gap: 15px; font-size: 0.8rem; color: #71717a; }
@@ -32,36 +60,32 @@
         .news-source { font-size: 0.8rem; color: #71717a; }
         footer { text-align: center; padding: 30px; color: #71717a; font-size: 0.9rem; }
         .highlight { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-weight: 600; }
-        @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } h1 { font-size: 2rem; } }
+        @media (max-width: 768px) { .grid { grid-template-columns: 1fr; } h1 { font-size: 2rem; } .kpi-grid { grid-template-columns: repeat(2, 1fr); } }
     </style>
 </head>
 <body>
     <div class="container">
         <header>
             <h1>📊 Daily Brief</h1>
-            <div class="date">Martedì 17 Febbraio 2026</div>
+            <div class="date" id="current-date">Martedì 17 Febbraio 2026</div>
             <div class="greeting">Buongiorno Anselmo! Ecco il tuo riepilogo giornaliero</div>
         </header>
+
+        <!-- KPI Section -->
+        <section class="kpi-section">
+            <div class="kpi-grid" id="kpi-container">
+                <!-- KPI Cards generate dinamicamente -->
+            </div>
+        </section>
+
         <div class="grid">
             <div class="card github">
                 <div class="card-header">
                     <div class="icon">🚀</div>
                     <h2>Progetti GitHub</h2>
                 </div>
-                <div class="repo-item">
-                    <div class="repo-name">openclaw-mcp-integration</div>
-                    <div class="repo-desc">Integrazione MCP con OpenClaw per automazione AI</div>
-                    <div class="repo-meta"><span>🔴 Live</span><span>⏱️ Oggi</span></div>
-                </div>
-                <div class="repo-item">
-                    <div class="repo-name">discord-bot-agent</div>
-                    <div class="repo-desc">Bot Discord connesso ad AI assistant</div>
-                    <div class="repo-meta"><span>🟢 Active</span><span>⏱️ 2h fa</span></div>
-                </div>
-                <div class="repo-item">
-                    <div class="repo-name">telegram-ai-bridge</div>
-                    <div class="repo-desc">Bridge Telegram per automazione messaggi</div>
-                    <div class="repo-meta"><span>🟡 Testing</span><span>⏱️ Ieri</span></div>
+                <div id="projects-list">
+                    <!-- Progetti ordinati dinamicamente -->
                 </div>
             </div>
             <div class="card interests">
@@ -108,5 +132,105 @@
             <p style="margin-top: 10px; font-size: 0.8rem;">Prossimo aggiornamento: Domani 09:00 CET</p>
         </footer>
     </div>
+
+    <script>
+        // Dati progetti
+        const projectsData = [
+            { name: 'openclaw-mcp-integration', desc: 'Integrazione MCP con OpenClaw per automazione AI', status: 'live', updated: 'Oggi' },
+            { name: 'discord-bot-agent', desc: 'Bot Discord connesso ad AI assistant', status: 'active', updated: '2h fa' },
+            { name: 'telegram-ai-bridge', desc: 'Bridge Telegram per automazione messaggi', status: 'testing', updated: 'Ieri' },
+            { name: 'wordpress-divi-automation', desc: 'Automazione workflow WordPress/Divi', status: 'active', updated: '3h fa' },
+            { name: 'make-webhook-handler', desc: 'Handler webhook per Make.com', status: 'live', updated: 'Oggi' },
+            { name: 'ai-agent-dashboard', desc: 'Dashboard monitoring AI agents', status: 'testing', updated: '2 giorni fa' }
+        ];
+
+        // Conta progetti per stato
+        function countByStatus(projects) {
+            const counts = { live: 0, active: 0, testing: 0, total: 0 };
+            projects.forEach(p => { counts[p.status]++; counts.total++; });
+            return counts;
+        }
+
+        // Anima contatore
+        function animateCounter(element, target, duration = 1000) {
+            const startTime = performance.now();
+            function update(currentTime) {
+                const progress = Math.min((currentTime - startTime) / duration, 1);
+                const easeOut = 1 - Math.pow(1 - progress, 3);
+                element.textContent = Math.floor(target * easeOut);
+                if (progress < 1) requestAnimationFrame(update);
+            }
+            requestAnimationFrame(update);
+        }
+
+        // Ordina progetti per stato
+        function sortProjectsByStatus(projects) {
+            const priority = { live: 0, active: 1, testing: 2 };
+            return [...projects].sort((a, b) => priority[a.status] - priority[b.status] || a.name.localeCompare(b.name));
+        }
+
+        // Genera KPI Cards
+        function generateKPICards() {
+            const counts = countByStatus(projectsData);
+            const kpiContainer = document.getElementById('kpi-container');
+            
+            const kpiData = [
+                { status: 'live', label: 'Live', value: counts.live, icon: '🔴' },
+                { status: 'active', label: 'Active', value: counts.active, icon: '🟢' },
+                { status: 'testing', label: 'Testing', value: counts.testing, icon: '🟡' },
+                { status: 'total', label: 'Totale', value: counts.total, icon: '📊' }
+            ];
+
+            kpiData.forEach(kpi => {
+                const card = document.createElement('div');
+                card.className = `kpi-card ${kpi.status}`;
+                card.innerHTML = `
+                    <div class="kpi-indicator"></div>
+                    <div class="kpi-badge">${kpi.icon} ${kpi.label}</div>
+                    <div class="kpi-value" data-target="${kpi.value}">0</div>
+                    <div class="kpi-label">progetti</div>
+                `;
+                kpiContainer.appendChild(card);
+                
+                // Anima il contatore
+                const valueEl = card.querySelector('.kpi-value');
+                animateCounter(valueEl, kpi.value);
+            });
+        }
+
+        // Genera lista progetti
+        function generateProjectsList() {
+            const sortedProjects = sortProjectsByStatus(projectsData);
+            const projectsList = document.getElementById('projects-list');
+            
+            sortedProjects.forEach(project => {
+                const item = document.createElement('div');
+                item.className = `repo-item ${project.status}`;
+                item.innerHTML = `
+                    <div class="repo-name">${project.name}</div>
+                    <div class="repo-desc">${project.desc}</div>
+                    <div class="repo-meta">
+                        <span>${project.status === 'live' ? '🔴' : project.status === 'active' ? '🟢' : '🟡'} ${project.status.charAt(0).toUpperCase() + project.status.slice(1)}</span>
+                        <span>⏱️ ${project.updated}</span>
+                    </div>
+                `;
+                projectsList.appendChild(item);
+            });
+        }
+
+        // Aggiorna data
+        function updateDate() {
+            const dateEl = document.getElementById('current-date');
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            dateEl.textContent = new Date().toLocaleDateString('it-IT', options);
+        }
+
+        // Inizializza
+        document.addEventListener('DOMContentLoaded', () => {
+            updateDate();
+            generateKPICards();
+            generateProjectsList();
+        });
+    </script>
 </body>
 </html>
