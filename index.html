@@ -3,250 +3,419 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Daily Brief - Anselmo Acquah</title>
+    <title>Daily Brief - Anselmo Acquah | AI Powered Dashboard</title>
+    <meta name="description" content="Dashboard personale AI-powered per Anselmo Acquah - Sviluppatore Web & Tecnico IT">
     <style>
         :root {
-            --bg-primary: #0f0f23;
-            --bg-secondary: #1a1a2e;
-            --bg-tertiary: #16213e;
-            --text-primary: #e4e4e7;
-            --text-secondary: #a1a1aa;
-            --text-muted: #71717a;
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-tertiary: #1a1a25;
+            --text-primary: #f0f0f5;
+            --text-secondary: #a0a0b0;
+            --text-muted: #606070;
+            --accent-primary: #6366f1;
+            --accent-secondary: #8b5cf6;
+            --accent-tertiary: #ec4899;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --info: #3b82f6;
             --card-bg: rgba(255,255,255,0.03);
-            --card-border: rgba(255,255,255,0.08);
-            --card-hover: rgba(255,255,255,0.05);
-            --shadow: rgba(0,0,0,0.3);
+            --card-border: rgba(255,255,255,0.06);
+            --glow: rgba(99,102,241,0.15);
         }
         [data-theme="light"] {
-            --bg-primary: #f8fafc;
-            --bg-secondary: #f1f5f9;
-            --bg-tertiary: #e2e8f0;
-            --text-primary: #1e293b;
-            --text-secondary: #64748b;
-            --text-muted: #94a3b8;
-            --card-bg: rgba(255,255,255,0.9);
+            --bg-primary: #fafafa;
+            --bg-secondary: #f4f4f5;
+            --bg-tertiary: #e4e4e7;
+            --text-primary: #18181b;
+            --text-secondary: #52525b;
+            --text-muted: #a1a1aa;
+            --card-bg: rgba(255,255,255,0.8);
             --card-border: rgba(0,0,0,0.08);
-            --card-hover: rgba(0,0,0,0.03);
-            --shadow: rgba(0,0,0,0.1);
+            --glow: rgba(99,102,241,0.1);
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; 
-            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-tertiary) 100%); 
-            color: var(--text-primary); 
-            min-height: 100vh; 
-            padding: 20px;
-            transition: all 0.3s ease;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-tertiary) 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
         }
-        .container { max-width: 1400px; margin: 0 auto; }
+        .container { max-width: 1400px; margin: 0 auto; padding: 20px; }
         
         /* Header */
-        header { text-align: center; padding: 40px 0; border-bottom: 1px solid var(--card-border); margin-bottom: 40px; }
-        h1 { 
-            font-size: clamp(2rem, 5vw, 3rem); 
-            font-weight: 700; 
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
-            -webkit-background-clip: text; 
-            -webkit-text-fill-color: transparent; 
-            margin-bottom: 10px; 
+        header { 
+            text-align: center; 
+            padding: 60px 20px 40px;
+            background: linear-gradient(180deg, var(--glow) 0%, transparent 100%);
+            border-bottom: 1px solid var(--card-border);
+            margin-bottom: 40px;
+            position: relative;
         }
-        .date { color: var(--text-secondary); font-size: 1.1rem; }
-        .greeting { margin-top: 15px; font-size: 1.3rem; color: #22d3ee; }
+        .profile-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            padding: 8px 20px;
+            border-radius: 50px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+        .profile-badge .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+        }
+        h1 { 
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 50%, var(--accent-tertiary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+            letter-spacing: -0.02em;
+        }
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+        .date { 
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-variant-numeric: tabular-nums;
+        }
         
         /* Theme Toggle */
         .theme-toggle { 
-            position: fixed; 
-            top: 20px; 
-            right: 20px; 
-            z-index: 1000; 
-            background: var(--card-bg); 
-            border: 1px solid var(--card-border); 
-            border-radius: 50px; 
-            padding: 10px 18px; 
-            cursor: pointer; 
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 12px;
+            cursor: pointer;
             font-size: 1.3rem;
             transition: all 0.3s ease;
             backdrop-filter: blur(10px);
         }
-        .theme-toggle:hover { transform: scale(1.1); box-shadow: 0 4px 20px var(--shadow); }
+        .theme-toggle:hover { 
+            transform: scale(1.1);
+            box-shadow: 0 0 30px var(--glow);
+        }
         
         /* KPI Section */
         .kpi-section { margin-bottom: 40px; }
         .kpi-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
-            gap: 20px; 
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
         }
-        @media (min-width: 768px) { .kpi-grid { grid-template-columns: repeat(4, 1fr); } }
-        
-        .kpi-card { 
-            background: var(--card-bg); 
-            border: 1px solid var(--card-border); 
-            border-radius: 16px; 
-            padding: 24px; 
-            text-align: center; 
-            position: relative; 
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        .kpi-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 28px;
+            text-align: center;
+            position: relative;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             backdrop-filter: blur(10px);
+            overflow: hidden;
         }
-        .kpi-card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px var(--shadow); }
-        .kpi-card.live { border-left: 4px solid #ef4444; }
-        .kpi-card.active { border-left: 4px solid #22c55e; }
-        .kpi-card.testing { border-left: 4px solid #eab308; }
-        .kpi-card.total { border-left: 4px solid #667eea; }
-        
-        .kpi-badge { 
-            display: inline-flex; 
-            align-items: center; 
-            gap: 6px; 
-            padding: 6px 12px; 
-            border-radius: 20px; 
-            font-size: 0.75rem; 
-            font-weight: 600; 
-            text-transform: uppercase; 
-            margin-bottom: 12px; 
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
+            opacity: 0;
+            transition: opacity 0.3s;
         }
-        .kpi-card.live .kpi-badge { background: rgba(239,68,68,0.2); color: #ef4444; }
-        .kpi-card.active .kpi-badge { background: rgba(34,197,94,0.2); color: #22c55e; }
-        .kpi-card.testing .kpi-badge { background: rgba(234,179,8,0.2); color: #eab308; }
-        .kpi-card.total .kpi-badge { background: rgba(102,126,234,0.2); color: #667eea; }
-        
-        .kpi-value { 
-            font-size: clamp(2rem, 4vw, 3rem); 
-            font-weight: 700; 
-            color: var(--text-primary); 
-            line-height: 1; 
-            font-variant-numeric: tabular-nums; 
+        .kpi-card:hover::before { opacity: 1; }
+        .kpi-card:hover { 
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px var(--glow);
         }
-        .kpi-label { font-size: 0.9rem; color: var(--text-secondary); margin-top: 8px; }
-        .kpi-indicator { 
-            position: absolute; 
-            top: 16px; 
-            right: 16px; 
-            width: 8px; 
-            height: 8px; 
-            border-radius: 50%; 
-            animation: pulse 1.5s ease-in-out infinite; 
+        .kpi-icon {
+            font-size: 2.5rem;
+            margin-bottom: 12px;
+            display: block;
         }
-        .kpi-card.live .kpi-indicator { background: #ef4444; }
-        .kpi-card.active .kpi-indicator { background: #22c55e; }
-        .kpi-card.testing .kpi-indicator { background: #eab308; }
-        .kpi-card.total .kpi-indicator { background: #667eea; }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+        .kpi-value {
+            font-size: 3rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--text-primary), var(--text-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+            font-variant-numeric: tabular-nums;
+        }
+        .kpi-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
         
         /* Main Grid */
-        .grid { 
-            display: grid; 
-            grid-template-columns: 1fr; 
-            gap: 25px; 
-            margin-bottom: 30px; 
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+            margin-bottom: 40px;
         }
         @media (min-width: 768px) { .grid { grid-template-columns: repeat(2, 1fr); } }
         @media (min-width: 1200px) { .grid { grid-template-columns: repeat(3, 1fr); } }
         
-        .card { 
-            background: var(--card-bg); 
-            border: 1px solid var(--card-border); 
-            border-radius: 16px; 
-            padding: 28px; 
-            backdrop-filter: blur(10px); 
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            padding: 28px;
+            backdrop-filter: blur(10px);
             transition: all 0.3s ease;
         }
-        .card:hover { transform: translateY(-5px); box-shadow: 0 20px 40px var(--shadow); }
-        .card-header { 
-            display: flex; 
-            align-items: center; 
-            margin-bottom: 20px; 
-            padding-bottom: 15px; 
-            border-bottom: 1px solid var(--card-border); 
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px var(--glow);
         }
-        .icon { 
-            width: 44px; 
-            height: 44px; 
-            border-radius: 12px; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            font-size: 1.5rem; 
-            margin-right: 15px; 
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 24px;
+            padding-bottom: 16px;
+            border-bottom: 1px solid var(--card-border);
         }
-        .github .icon { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
-        .interests .icon { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
-        .news .icon { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
-        .card h2 { font-size: 1.3rem; font-weight: 600; color: var(--text-primary); }
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+        }
+        .card h2 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
         
-        .repo-item { 
-            padding: 15px; 
-            background: var(--card-hover); 
-            border-radius: 10px; 
-            margin-bottom: 12px; 
-            border-left: 3px solid; 
-            transition: all 0.2s; 
-        }
-        .repo-item:hover { background: var(--card-hover); filter: brightness(1.1); }
-        .repo-item.live { border-left-color: #ef4444; }
-        .repo-item.active { border-left-color: #22c55e; }
-        .repo-item.testing { border-left-color: #eab308; }
-        .repo-name { font-weight: 600; color: var(--text-primary); margin-bottom: 5px; }
-        .repo-desc { font-size: 0.9rem; color: var(--text-secondary); margin-bottom: 8px; }
-        .repo-meta { display: flex; gap: 15px; font-size: 0.8rem; color: var(--text-muted); }
-        
-        .tag { 
-            display: inline-block; 
-            padding: 6px 14px; 
-            background: rgba(79, 172, 254, 0.15); 
-            border: 1px solid rgba(79, 172, 254, 0.3); 
-            border-radius: 20px; 
-            font-size: 0.85rem; 
-            margin: 5px; 
-            color: #4facfe; 
+        /* Projects */
+        .project-item {
+            padding: 16px;
+            background: rgba(255,255,255,0.02);
+            border-radius: 12px;
+            margin-bottom: 12px;
+            border-left: 3px solid var(--accent-primary);
             transition: all 0.2s;
         }
-        .tag:hover { transform: scale(1.05); background: rgba(79, 172, 254, 0.25); }
-        
-        .news-item { padding: 14px 0; border-bottom: 1px solid var(--card-border); }
-        .news-item:last-child { border-bottom: none; }
-        .news-title { font-weight: 500; color: var(--text-primary); margin-bottom: 6px; line-height: 1.4; }
-        .news-source { font-size: 0.8rem; color: var(--text-muted); }
-        
-        footer { text-align: center; padding: 30px; color: var(--text-muted); font-size: 0.9rem; }
-        .highlight { 
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
-            -webkit-background-clip: text; 
-            -webkit-text-fill-color: transparent; 
-            font-weight: 600; 
+        .project-item:hover {
+            background: rgba(255,255,255,0.04);
+            transform: translateX(4px);
         }
+        .project-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .project-meta {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            display: flex;
+            gap: 16px;
+            margin-top: 8px;
+        }
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+        .badge-live { background: rgba(34,197,94,0.15); color: var(--success); }
+        .badge-active { background: rgba(59,130,246,0.15); color: var(--info); }
+        .badge-recent { background: rgba(139,92,246,0.15); color: var(--accent-secondary); }
+        
+        /* Tags */
+        .tags-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .tag {
+            padding: 8px 16px;
+            background: linear-gradient(135deg, rgba(99,102,241,0.1), rgba(139,92,246,0.1));
+            border: 1px solid rgba(99,102,241,0.2);
+            border-radius: 25px;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            transition: all 0.2s;
+            cursor: default;
+        }
+        .tag:hover {
+            transform: scale(1.05);
+            background: linear-gradient(135deg, rgba(99,102,241,0.2), rgba(139,92,246,0.2));
+            color: var(--text-primary);
+        }
+        
+        /* News */
+        .news-item {
+            padding: 16px 0;
+            border-bottom: 1px solid var(--card-border);
+        }
+        .news-item:last-child { border-bottom: none; }
+        .news-title {
+            font-weight: 500;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+            line-height: 1.5;
+            font-size: 0.95rem;
+        }
+        .news-source {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .news-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--accent-primary);
+            border-radius: 50%;
+        }
+        
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 20px;
+            border-top: 1px solid var(--card-border);
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+        .footer-brand {
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--card-border);
+            border-top-color: var(--accent-primary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
     </style>
 </head>
 <body>
-    <button class="theme-toggle" id="themeToggle" aria-label="Cambia tema">🌙</button>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
 
     <div class="container">
         <header>
+            <div class="profile-badge">
+                <span class="status-dot"></span>
+                <span>Sviluppatore Web & Tecnico IT</span>
+            </div>
             <h1>📊 Daily Brief</h1>
+            <div class="subtitle">Anselmo Acquah</div>
             <div class="date" id="current-date"></div>
-            <div class="greeting">Buongiorno Anselmo! Ecco il tuo riepilogo giornaliero</div>
         </header>
 
+        <!-- KPI Section -->
         <section class="kpi-section">
-            <div class="kpi-grid" id="kpi-container"></div>
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <span class="kpi-icon">📁</span>
+                    <div class="kpi-value">2</div>
+                    <div class="kpi-label">Repository GitHub</div>
+                </div>
+                <div class="kpi-card">
+                    <span class="kpi-icon">⚡</span>
+                    <div class="kpi-value">8</div>
+                    <div class="kpi-label">Aree di Interesse</div>
+                </div>
+                <div class="kpi-card">
+                    <span class="kpi-icon">🔥</span>
+                    <div class="kpi-value">5</div>
+                    <div class="kpi-label">Trending News</div>
+                </div>
+                <div class="kpi-card">
+                    <span class="kpi-icon">🤖</span>
+                    <div class="kpi-value">AI</div>
+                    <div class="kpi-label">Powered Dashboard</div>
+                </div>
+            </div>
         </section>
 
         <div class="grid">
-            <div class="card github">
+            <!-- GitHub Projects -->
+            <div class="card">
                 <div class="card-header">
-                    <div class="icon">🚀</div>
+                    <div class="card-icon">🚀</div>
                     <h2>Progetti GitHub</h2>
                 </div>
-                <div id="projects-list"></div>
+                
+                <div class="project-item">
+                    <div class="project-name">
+                        daily-brief-dashboard
+                        <span class="badge badge-live">● Live</span>
+                    </div>
+                    <div class="project-meta">
+                        <span>⏱️ Oggi</span>
+                        <span>🌐 GitHub Pages</span>
+                    </div>
+                </div>
+                
+                <div class="project-item">
+                    <div class="project-name">
+                        files
+                        <span class="badge badge-active">● Active</span>
+                    </div>
+                    <div class="project-meta">
+                        <span>⏱️ 17 Feb 2026</span>
+                        <span>📦 Storage</span>
+                    </div>
+                </div>
             </div>
-            
-            <div class="card interests">
+
+            <!-- Interests -->
+            <div class="card">
                 <div class="card-header">
-                    <div class="icon">💡</div>
+                    <div class="card-icon">💡</div>
                     <h2>Interessi & Focus</h2>
                 </div>
-                <div>
+                <div class="tags-container">
                     <span class="tag">🤖 AI Agents</span>
                     <span class="tag">⚡ Automazione</span>
                     <span class="tag">🔧 MCP Protocol</span>
@@ -257,47 +426,67 @@
                     <span class="tag">🚀 DevOps</span>
                 </div>
             </div>
-            
-            <div class="card news">
+
+            <!-- AI News -->
+            <div class="card">
                 <div class="card-header">
-                    <div class="icon">📰</div>
-                    <h2>News & Aggiornamenti</h2>
+                    <div class="card-icon">📰</div>
+                    <h2>AI & Tech News</h2>
                 </div>
+                
                 <div class="news-item">
-                    <div class="news-title">OpenAI rilascia nuove API per function calling</div>
-                    <div class="news-source">techcrunch.com • 2h fa</div>
+                    <div class="news-title">WordPress MCP Adapter ufficiale - AI Agents integration</div>
+                    <div class="news-source">
+                        <span class="news-dot"></span>
+                        developer.wordpress.org
+                    </div>
                 </div>
+                
                 <div class="news-item">
-                    <div class="news-title">Zapier MCP: nuove integrazioni con Google Workspace</div>
-                    <div class="news-source">zapier.com • 5h fa</div>
+                    <div class="news-title">WordPress 7.0 Beta con AI built into core (19 Feb)</div>
+                    <div class="news-source">
+                        <span class="news-dot"></span>
+                        365i.co.uk
+                    </div>
                 </div>
+                
                 <div class="news-item">
-                    <div class="news-title">Discord aggiorna API bot con nuove funzionalità</div>
-                    <div class="news-source">discord.com • 8h fa</div>
+                    <div class="news-title">WordPress.com lancia MCP server nativo per AI agents</div>
+                    <div class="news-source">
+                        <span class="news-dot"></span>
+                        startuphub.ai
+                    </div>
                 </div>
+                
                 <div class="news-item">
-                    <div class="news-title">MCP Protocol: nuova versione 2026.1 con SSE support</div>
-                    <div class="news-source">modelcontextprotocol.io • 12h fa</div>
+                    <div class="news-title">FlowMattic MCP: Workflow automation per WordPress</div>
+                    <div class="news-source">
+                        <span class="news-dot"></span>
+                        flowmattic.com
+                    </div>
+                </div>
+                
+                <div class="news-item">
+                    <div class="news-title">WooCommerce MCP integration: ordini, prodotti, clienti</div>
+                    <div class="news-source">
+                        <span class="news-dot"></span>
+                        woocommerce.com
+                    </div>
                 </div>
             </div>
         </div>
-        
+
         <footer>
-            <p>🤖 Generato da <span class="highlight">OpenClaw AI</span> • <a href="https://openclaw.ai" style="color: #667eea;">openclaw.ai</a></p>
-            <p style="margin-top: 10px; font-size: 0.8rem;">Aggiornato: <span id="last-updated"></span></p>
+            <p>
+                🤖 Generato da <span class="footer-brand">OpenClaw AI</span>
+            </p>
+            <p style="margin-top: 8px; font-size: 0.85rem;">
+                Ultimo aggiornamento: <span id="last-updated"></span>
+            </p>
         </footer>
     </div>
 
     <script>
-        const projectsData = [
-            { name: 'openclaw-mcp-integration', desc: 'Integrazione MCP con OpenClaw', status: 'live', updated: 'Oggi' },
-            { name: 'discord-bot-agent', desc: 'Bot Discord con AI assistant', status: 'active', updated: '2h fa' },
-            { name: 'telegram-ai-bridge', desc: 'Bridge Telegram per automazione', status: 'testing', updated: 'Ieri' },
-            { name: 'wordpress-divi-automation', desc: 'Automazione WordPress/Divi', status: 'active', updated: '3h fa' },
-            { name: 'make-webhook-handler', desc: 'Handler webhook Make.com', status: 'live', updated: 'Oggi' },
-            { name: 'ai-agent-dashboard', desc: 'Dashboard monitoring AI', status: 'testing', updated: '2 giorni fa' }
-        ];
-
         // Theme Toggle
         const themeToggle = document.getElementById('themeToggle');
         const html = document.documentElement;
@@ -314,68 +503,23 @@
         const savedTheme = localStorage.getItem('theme') || 'dark';
         html.setAttribute('data-theme', savedTheme);
         themeToggle.textContent = savedTheme === 'dark' ? '🌙' : '☀️';
-
-        // Date
-        function updateDate() {
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            document.getElementById('current-date').textContent = new Date().toLocaleDateString('it-IT', options);
-            document.getElementById('last-updated').textContent = new Date().toLocaleString('it-IT');
+        
+        // Update dates
+        function updateDates() {
+            const now = new Date();
+            const options = { 
+                weekday: 'long', 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            };
+            document.getElementById('current-date').textContent = 
+                now.toLocaleDateString('it-IT', options);
+            document.getElementById('last-updated').textContent = 
+                now.toLocaleString('it-IT');
         }
-
-        // KPI Cards
-        function generateKPICards() {
-            const counts = { live: 0, active: 0, testing: 0, total: 0 };
-            projectsData.forEach(p => { counts[p.status]++; counts.total++; });
-            
-            const kpiData = [
-                { status: 'live', label: 'Live', value: counts.live, icon: '🔴' },
-                { status: 'active', label: 'Active', value: counts.active, icon: '🟢' },
-                { status: 'testing', label: 'Testing', value: counts.testing, icon: '🟡' },
-                { status: 'total', label: 'Totale', value: counts.total, icon: '📊' }
-            ];
-
-            const container = document.getElementById('kpi-container');
-            kpiData.forEach(kpi => {
-                const card = document.createElement('div');
-                card.className = `kpi-card ${kpi.status}`;
-                card.innerHTML = `
-                    <div class="kpi-indicator"></div>
-                    <div class="kpi-badge">${kpi.icon} ${kpi.label}</div>
-                    <div class="kpi-value">${kpi.value}</div>
-                    <div class="kpi-label">progetti</div>
-                `;
-                container.appendChild(card);
-            });
-        }
-
-        // Projects List
-        function generateProjectsList() {
-            const priority = { live: 0, active: 1, testing: 2 };
-            const sorted = [...projectsData].sort((a, b) => priority[a.status] - priority[b.status]);
-            
-            const container = document.getElementById('projects-list');
-            sorted.forEach(project => {
-                const item = document.createElement('div');
-                item.className = `repo-item ${project.status}`;
-                const statusIcon = project.status === 'live' ? '🔴' : project.status === 'active' ? '🟢' : '🟡';
-                item.innerHTML = `
-                    <div class="repo-name">${project.name}</div>
-                    <div class="repo-desc">${project.desc}</div>
-                    <div class="repo-meta">
-                        <span>${statusIcon} ${project.status}</span>
-                        <span>⏱️ ${project.updated}</span>
-                    </div>
-                `;
-                container.appendChild(item);
-            });
-        }
-
-        // Init
-        document.addEventListener('DOMContentLoaded', () => {
-            updateDate();
-            generateKPICards();
-            generateProjectsList();
-        });
+        
+        updateDates();
     </script>
 </body>
 </html>
