@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="it" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Brief - Anselmo Acquah | 18 Feb 2026</title>
+    <meta name="description" content="Daily Brief AI-powered per Anselmo Acquah - 18 Febbraio 2026">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0a0f;
+            --bg-secondary: #12121a;
+            --bg-tertiary: #1a1a25;
+            --text-primary: #f0f0f5;
+            --text-secondary: #a0a0b0;
+            --text-muted: #606070;
+            --accent-primary: #6366f1;
+            --accent-secondary: #8b5cf6;
+            --accent-tertiary: #ec4899;
+            --success: #22c55e;
+            --warning: #f59e0b;
+            --info: #3b82f6;
+            --card-bg: rgba(255,255,255,0.03);
+            --card-border: rgba(255,255,255,0.06);
+            --glow: rgba(99,102,241,0.15);
+            --glass: rgba(255,255,255,0.05);
+            --blur: blur(20px);
+        }
+        [data-theme="light"] {
+            --bg-primary: #fafafa;
+            --bg-secondary: #f4f4f5;
+            --bg-tertiary: #e4e4e7;
+            --text-primary: #18181b;
+            --text-secondary: #52525b;
+            --text-muted: #a1a1aa;
+            --card-bg: rgba(255,255,255,0.8);
+            --card-border: rgba(0,0,0,0.08);
+            --glow: rgba(99,102,241,0.1);
+            --glass: rgba(255,255,255,0.6);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body { 
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, var(--bg-primary) 0%, var(--bg-secondary) 50%, var(--bg-tertiary) 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse at 20% 80%, rgba(99,102,241,0.15) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(139,92,246,0.1) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 50%, rgba(236,72,153,0.05) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: -1;
+            animation: meshMove 20s ease-in-out infinite;
+        }
+        
+        @keyframes meshMove {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(2%, -2%) scale(1.02); }
+            66% { transform: translate(-1%, 1%) scale(0.98); }
+        }
+        
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        
+        header { 
+            text-align: center; 
+            padding: 40px 20px 30px;
+            position: relative;
+        }
+        
+        .profile-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--glass);
+            backdrop-filter: var(--blur);
+            border: 1px solid var(--card-border);
+            padding: 8px 20px;
+            border-radius: 50px;
+            margin-bottom: 20px;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        
+        .profile-badge .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+            box-shadow: 0 0 10px var(--success);
+        }
+        
+        @keyframes pulse { 
+            0%, 100% { opacity: 1; transform: scale(1); } 
+            50% { opacity: 0.7; transform: scale(1.1); } 
+        }
+        
+        h1 { 
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-secondary) 50%, var(--accent-tertiary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+        
+        .subtitle { 
+            color: var(--text-secondary); 
+            font-size: 1.1rem; 
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .date { 
+            color: var(--text-muted); 
+            font-size: 0.9rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        /* KPI Cards */
+        .kpi-section { margin-bottom: 30px; }
+        
+        .kpi-grid { 
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+        }
+        
+        .kpi-card {
+            background: var(--glass);
+            backdrop-filter: var(--blur);
+            border: 1px solid var(--card-border);
+            border-radius: 16px;
+            padding: 20px 14px;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .kpi-card:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 15px 35px var(--glow);
+        }
+        
+        .kpi-icon { 
+            font-size: 1.8rem; 
+            margin-bottom: 8px; 
+            display: block;
+        }
+        
+        .kpi-value { 
+            font-size: 2rem; 
+            font-weight: 800; 
+            color: var(--text-primary); 
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .kpi-label { 
+            font-size: 0.7rem; 
+            color: var(--text-muted); 
+            margin-top: 6px; 
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            font-weight: 600;
+        }
+        
+        /* Main Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        @media (min-width: 900px) { 
+            .grid { grid-template-columns: repeat(2, 1fr); } 
+        }
+        
+        .card {
+            background: var(--glass);
+            backdrop-filter: var(--blur);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card:hover { 
+            box-shadow: 0 20px 40px var(--glow);
+        }
+        
+        .card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 22px;
+            background: rgba(255,255,255,0.02);
+            border-bottom: 1px solid var(--card-border);
+        }
+        
+        .card-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            box-shadow: 0 4px 15px var(--glow);
+        }
+        
+        .card h2 { 
+            font-size: 1.1rem; 
+            font-weight: 700; 
+            color: var(--text-primary); 
+            flex: 1;
+        }
+        
+        .card-content {
+            padding: 18px 22px;
+        }
+        
+        /* Projects */
+        .project-item {
+            padding: 14px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            margin-bottom: 12px;
+            border-left: 3px solid var(--accent-primary);
+            transition: all 0.3s;
+            text-decoration: none;
+            display: block;
+            color: inherit;
+        }
+        
+        .project-item:hover { 
+            background: rgba(255,255,255,0.05); 
+            transform: translateX(6px);
+        }
+        
+        .project-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+        
+        .project-desc {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        
+        .project-meta {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 3px 8px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+        }
+        
+        .badge-live { 
+            background: rgba(34,197,94,0.15); 
+            color: var(--success);
+        }
+        
+        .badge-active { 
+            background: rgba(59,130,246,0.15); 
+            color: var(--info);
+        }
+        
+        .badge-trending {
+            background: rgba(236,72,153,0.15);
+            color: var(--accent-tertiary);
+        }
+        
+        /* News */
+        .news-item {
+            padding: 14px 0;
+            border-bottom: 1px solid var(--card-border);
+        }
+        
+        .news-item:last-child { border-bottom: none; }
+        
+        .news-link {
+            text-decoration: none;
+            color: inherit;
+            display: block;
+        }
+        
+        .news-link:hover .news-title { 
+            color: var(--accent-primary);
+        }
+        
+        .news-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+            line-height: 1.4;
+            font-size: 0.9rem;
+        }
+        
+        .news-summary {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            line-height: 1.4;
+        }
+        
+        .news-meta {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .news-source {
+            color: var(--accent-secondary);
+            font-weight: 500;
+        }
+        
+        /* Tasks */
+        .task-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 12px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            margin-bottom: 10px;
+            transition: all 0.3s;
+        }
+        
+        .task-item:hover {
+            background: rgba(255,255,255,0.05);
+        }
+        
+        .task-priority {
+            width: 4px;
+            height: 40px;
+            border-radius: 2px;
+            flex-shrink: 0;
+        }
+        
+        .task-priority.high { background: linear-gradient(to bottom, #ef4444, #f97316); }
+        .task-priority.medium { background: linear-gradient(to bottom, #f59e0b, #eab308); }
+        .task-priority.low { background: linear-gradient(to bottom, #22c55e, #10b981); }
+        
+        .task-content {
+            flex: 1;
+        }
+        
+        .task-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.9rem;
+            margin-bottom: 4px;
+        }
+        
+        .task-desc {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 6px;
+        }
+        
+        .task-meta {
+            display: flex;
+            gap: 8px;
+            font-size: 0.7rem;
+        }
+        
+        .task-tag {
+            padding: 2px 8px;
+            border-radius: 10px;
+            background: var(--card-bg);
+            color: var(--text-muted);
+        }
+        
+        /* Trending Repo */
+        .trending-item {
+            padding: 14px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            margin-bottom: 12px;
+            border-left: 3px solid var(--accent-tertiary);
+            transition: all 0.3s;
+        }
+        
+        .trending-item:hover {
+            background: rgba(255,255,255,0.05);
+            transform: translateX(6px);
+        }
+        
+        .trending-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 6px;
+        }
+        
+        .trending-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 0.95rem;
+        }
+        
+        .trending-stars {
+            font-size: 0.8rem;
+            color: var(--accent-tertiary);
+            font-weight: 600;
+        }
+        
+        .trending-desc {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+        }
+        
+        .trending-meta {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            border-top: 1px solid var(--card-border);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+        
+        .footer-brand {
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: var(--card-border); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="profile-badge">
+                <span class="status-dot"></span>
+                <span>📊 Daily Brief del Giorno</span>
+            </div>
+            <h1>🌅 Daily Brief</h1>
+            <div class="subtitle">Anselmo Acquah</div>
+            <div class="date">Mercoledì, 18 Febbraio 2026</div>
+        </header>
+
+        <section class="kpi-section">
+            <div class="kpi-grid">
+                <div class="kpi-card">
+                    <span class="kpi-icon">📁</span>
+                    <div class="kpi-value">20</div>
+                    <div class="kpi-label">Repo GitHub</div>
+                </div>
+                <div class="kpi-card">
+                    <span class="kpi-icon">🔥</span>
+                    <div class="kpi-value">5</div>
+                    <div class="kpi-label">News AI</div>
+                </div>
+                <div class="kpi-card">
+                    <span class="kpi-icon">⚡</span>
+                    <div class="kpi-value">4</div>
+                    <div class="kpi-label">Task Prioritari</div>
+                </div>
+                <div class="kpi-card">
+                    <span class="kpi-icon">🚀</span>
+                    <div class="kpi-value">3</div>
+                    <div class="kpi-label">Trending Repo</div>
+                </div>
+            </div>
+        </section>
+
+        <div class="grid">
+            <!-- GitHub Projects -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">🚀</div>
+                    <h2>Progetti GitHub Recenti</h2>
+                </div>
+                <div class="card-content">
+                    <a href="https://github.com/slemo54/daily-brief-dashboard" target="_blank" class="project-item">
+                        <div class="project-name">📊 daily-brief-dashboard <span class="badge badge-live">● Live</span></div>
+                        <div class="project-desc">Dashboard personale AI-powered con GitHub API, news e tema dark/light</div>
+                        <div class="project-meta">⭐ Python · 🔄 17 Feb · 🌐 GitHub Pages</div>
+                    </a>
+                    <a href="https://github.com/slemo54/ai-social-media-cockpit" target="_blank" class="project-item">
+                        <div class="project-name">🎯 ai-social-media-cockpit <span class="badge badge-active">● Active</span></div>
+                        <div class="project-desc">AI Social Media Cockpit - Generazione contenuti social con Next.js, Supabase e Abacus.ai</div>
+                        <div class="project-meta">⭐ TypeScript · 🔄 12 Feb · 🚀 Next.js</div>
+                    </a>
+                    <a href="https://github.com/slemo54/AI_tube_pulse" target="_blank" class="project-item">
+                        <div class="project-name">📺 AI_tube_pulse <span class="badge badge-active">● Active</span></div>
+                        <div class="project-desc">AI Tube Pulse - YouTube video analytics dashboard with Perplexity integration</div>
+                        <div class="project-meta">⭐ TypeScript · 🔄 12 Jan · 📊 Analytics</div>
+                    </a>
+                    <a href="https://github.com/slemo54/asd-verona-beach-volley" target="_blank" class="project-item">
+                        <div class="project-name">🏐 asd-verona-beach-volley</div>
+                        <div class="project-desc">Progetto ASD Verona Beach Volley</div>
+                        <div class="project-meta">⭐ TypeScript · 🔄 16 Feb · 🏖️ Sport</div>
+                    </a>
+                    <a href="https://github.com/slemo54/LifeQuests" target="_blank" class="project-item">
+                        <div class="project-name">🎯 LifeQuests</div>
+                        <div class="project-desc">Life quest - Gestione obiettivi personali</div>
+                        <div class="project-meta">⭐ TypeScript · 🔄 29 Jan · 📝 Productivity</div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Trending GitHub Repositories -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">🔥</div>
+                    <h2>Trending AI/Automation GitHub</h2>
+                </div>
+                <div class="card-content">
+                    <div class="trending-item">
+                        <div class="trending-header">
+                            <span class="trending-name">mastra-ai / mastra</span>
+                            <span class="trending-stars">⭐ 5,571 (+1,140 oggi)</span>
+                        </div>
+                        <div class="trending-desc">AI Agent Framework for TypeScript - Build powerful and modular AI-driven applications</div>
+                        <div class="trending-meta">TypeScript · AI Agents · Automation</div>
+                    </div>
+                    <div class="trending-item">
+                        <div class="trending-header">
+                            <span class="trending-name">yamadashy / repomix</span>
+                            <span class="trending-stars">⭐ 10,693 (+118 oggi)</span>
+                        </div>
+                        <div class="trending-desc">AI-Friendly Codebase Packing - Compress entire repositories into a single AI-friendly file for LLMs</div>
+                        <div class="trending-meta">TypeScript · LLM Tools · Developer Productivity</div>
+                    </div>
+                    <div class="trending-item">
+                        <div class="trending-header">
+                            <span class="trending-name">browser-use / browser-use</span>
+                            <span class="trending-stars">⭐ Trending</span>
+                        </div>
+                        <div class="trending-desc">Enable AI to control your browser - Web automation for AI agents</div>
+                        <div class="trending-meta">Python · Web Automation · AI Agents</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AI & Automation News -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">📰</div>
+                    <h2>News AI & Automazione</h2>
+                </div>
+                <div class="card-content">
+                    <div class="news-item">
+                        <a href="https://www.marketingprofs.com/opinions/2025/52757/ai-update-february-21-2025-ai-news-and-views-from-the-past-week" target="_blank" class="news-link">
+                            <div class="news-title">🤖 GPT-4.5 "Orion" in arrivo nelle prossime settimane</div>
+                            <div class="news-summary">Microsoft sta aumentando la capacità dei server in preparazione al rilascio di GPT-4.5 (Orion) e GPT-5 previsto per fine maggio. OpenAI punta a unificare i modelli in GPT-5.</div>
+                            <div class="news-meta"><span class="news-source">MarketingProfs</span> · Feb 2025 · AI Models</div>
+                        </a>
+                    </div>
+                    <div class="news-item">
+                        <a href="https://automatetodominate.ai/blog/february-2025-ai-breakthrough-month" target="_blank" class="news-link">
+                            <div class="news-title">⚡ Febbraio 2025: Il mese delle rivoluzioni AI</div>
+                            <div class="news-summary">Rilascio di AI multimodali integrate con 96% accuracy, primi processori AI quantum-enhanced commerciali (1000x velocità), e maturazione dell'Edge AI su smartphone.</div>
+                            <div class="news-meta"><span class="news-source">AutomateToDominate</span> · Feb 2025 · Breakthrough</div>
+                        </a>
+                    </div>
+                    <div class="news-item">
+                        <a href="https://community.openai.com/t/ai-pulse-news-roundup-february-2025-edition/1109121" target="_blank" class="news-link">
+                            <div class="news-title">🎵 Spotify + ElevenLabs: Audiolibri AI-narrati</div>
+                            <div class="news-summary">Spotify espande gli audiolibri generati da AI attraverso la partnership con ElevenLabs, supportando 29 lingue. I libri saranno chiaramente etichettati come AI-narrati.</div>
+                            <div class="news-meta"><span class="news-source">OpenAI Community</span> · Feb 2025 · Audio AI</div>
+                        </a>
+                    </div>
+                    <div class="news-item">
+                        <a href="https://github.blog/developer-skills/agentic-ai-mcp-and-spec-driven-development-top-blog-posts-of-2025/" target="_blank" class="news-link">
+                            <div class="news-title">🔧 Claude 4 in arrivo con web search e reasoning</div>
+                            <div class="news-summary">Anthropic prepara Claude 4 con capacità di reasoning avanzate e supporto per la ricerca web, in competizione diretta con le funzionalità o-series di OpenAI.</div>
+                            <div class="news-meta"><span class="news-source">GitHub Blog</span> · Feb 2025 · AI Agents</div>
+                        </a>
+                    </div>
+                    <div class="news-item">
+                        <a href="https://www.linkedin.com/pulse/top-ai-related-news-highlights-february-2025-murat-korkmaz-d9iee" target="_blank" class="news-link">
+                            <div class="news-title">💰 Big Tech investe $340 miliardi in AI</div>
+                            <div class="news-summary">Le principali aziende tech hanno annunciato investimenti record nel settore AI, sollevando preoccupazioni sulla sostenibilità e sulla regolamentazione.</div>
+                            <div class="news-meta"><span class="news-source">LinkedIn</span> · Feb 2025 · Industry</div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Priority Tasks -->
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-icon">⚡</div>
+                    <h2>Task Prioritari Oggi</h2>
+                </div>
+                <div class="card-content">
+                    <div class="task-item">
+                        <div class="task-priority high"></div>
+                        <div class="task-content">
+                            <div class="task-title">🎤 Ted Talk (20 min)</div>
+                            <div class="task-desc">Guarda un TED talk per sviluppo personale</div>
+                            <div class="task-meta">
+                                <span class="task-tag">🕐 08:00</span>
+                                <span class="task-tag">📚 Learning</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="task-item">
+                        <div class="task-priority high"></div>
+                        <div class="task-content">
+                            <div class="task-title">📝 Check Note Rocketbook (10 min)</div>
+                            <div class="task-desc">Revisiona le scansioni recenti e organizza i task</div>
+                            <div class="task-meta">
+                                <span class="task-tag">🕐 09:00</span>
+                                <span class="task-tag">📓 Productivity</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="task-item">
+                        <div class="task-priority medium"></div>
+                        <div class="task-content">
+                            <div class="task-title">💼 Side Job - 1h</div>
+                            <div class="task-desc">Lavora al progetto side per 1 ora</div>
+                            <div class="task-meta">
+                                <span class="task-tag">🕐 14:00</span>
+                                <span class="task-tag">💵 Income</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="task-item">
+                        <div class="task-priority low"></div>
+                        <div class="task-content">
+                            <div class="task-title">📖 Storytell (30 min)</div>
+                            <div class="task-desc">Esercizio di storytelling e comunicazione</div>
+                            <div class="task-meta">
+                                <span class="task-tag">🕐 21:00</span>
+                                <span class="task-tag">🎭 Creativity</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>🤖 Generato da <span class="footer-brand">OpenClaw AI</span> · 📊 Daily Brief · 18 Feb 2026</p>
+            <p style="margin-top: 6px; font-size: 0.8rem;">
+                🔗 <a href="https://slemo54.github.io/daily-brief-dashboard/" target="_blank" style="color: var(--accent-primary);">Dashboard Principale</a> · 
+                📧 <a href="mailto:anselmo.acquah54@gmail.com" style="color: var(--accent-primary);">Contatta Supporto</a>
+            </p>
+        </footer>
+    </div>
+</body>
+</html>
