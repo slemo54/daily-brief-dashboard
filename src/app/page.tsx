@@ -9,8 +9,10 @@ import {
   AINewsWidget,
   TaskPrioritiesWidget,
   RocketbookWidget,
+  MealPlannerWidget,
 } from '@/components/widgets';
-import { getWeatherData, getLifeQuests, getGitHubProjects, getAINews, getRocketbookNotes } from '@/lib/data';
+import { getLifeQuests, getGitHubProjects, getAINews, getRocketbookNotes } from '@/lib/data';
+import { getWeatherData } from '@/lib/weather';
 
 export const dynamic = 'force-dynamic';
 
@@ -67,6 +69,11 @@ export default async function DashboardPage() {
 
           {/* Countdown - spans 1 column */}
           <CountdownWidget />
+
+          {/* Meal Planner - spans 2 columns */}
+          <div className="md:col-span-2">
+            <MealPlannerWidget />
+          </div>
 
           {/* Life Quests - spans 2 columns on larger screens */}
           <div className="md:col-span-2">

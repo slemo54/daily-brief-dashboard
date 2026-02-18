@@ -1,4 +1,4 @@
-import { RocketbookNote, LifeQuest, GitHubProject, AINewsItem } from '@/lib/types';
+import { RocketbookNote, LifeQuest, GitHubProject, AINewsItem, WeatherData } from '@/lib/types';
 
 export async function getRocketbookNotes(): Promise<RocketbookNote[]> {
   try {
@@ -73,4 +73,15 @@ export async function getAINews(): Promise<AINewsItem[]> {
       publishedAt: new Date().toISOString(),
     },
   ];
+}
+
+export async function getWeatherData(): Promise<WeatherData> {
+  // Return sample data - in production this would call the weather API
+  return {
+    temp: 15,
+    condition: 'Parzialmente nuvoloso',
+    humidity: 65,
+    wind: 8,
+    icon: '⛅',
+  };
 }

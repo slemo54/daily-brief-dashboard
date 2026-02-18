@@ -1,8 +1,9 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  output: 'export',
-  distDir: 'dist',
+  // Remove output: 'export' to support API routes for Vercel cron jobs
+  // output: 'export',
+  // distDir: 'dist',
   images: {
     unoptimized: true,
   },

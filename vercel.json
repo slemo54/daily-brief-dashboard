@@ -5,12 +5,12 @@
       "schedule": "0 7 * * *"
     },
     {
-      "path": "/api/cron/rocketbook-sync",
+      "path": "/api/cron/meal-reminders?type=morning",
       "schedule": "0 8 * * *"
     },
     {
-      "path": "/api/cron/lifequests-sync",
-      "schedule": "0 5 * * *"
+      "path": "/api/cron/meal-reminders?type=evening",
+      "schedule": "0 18 * * *"
     }
   ]
 }
