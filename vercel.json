@@ -1,0 +1,16 @@
+{
+  "crons": [
+    {
+      "path": "/api/cron/daily-brief",
+      "schedule": "0 7 * * *"
+    },
+    {
+      "path": "/api/cron/rocketbook-sync",
+      "schedule": "0 8 * * *"
+    },
+    {
+      "path": "/api/cron/lifequests-sync",
+      "schedule": "0 5 * * *"
+    }
+  ]
+}
