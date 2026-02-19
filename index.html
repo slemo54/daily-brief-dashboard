@@ -139,6 +139,59 @@
         
         .fab-btn:hover::after { opacity: 1; }
         
+        /* Enhanced Animations */
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeInScale {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        
+        @keyframes glowPulse {
+            0%, 100% { box-shadow: 0 0 20px var(--glow); }
+            50% { box-shadow: 0 0 40px var(--glow), 0 0 60px var(--glow); }
+        }
+        
+        .widget {
+            animation: slideInUp 0.6s ease-out backwards;
+        }
+        
+        .widget:nth-child(1) { animation-delay: 0.1s; }
+        .widget:nth-child(2) { animation-delay: 0.15s; }
+        .widget:nth-child(3) { animation-delay: 0.2s; }
+        .widget:nth-child(4) { animation-delay: 0.25s; }
+        .widget:nth-child(5) { animation-delay: 0.3s; }
+        .widget:nth-child(6) { animation-delay: 0.35s; }
+        .widget:nth-child(7) { animation-delay: 0.4s; }
+        .widget:nth-child(8) { animation-delay: 0.45s; }
+        .widget:nth-child(9) { animation-delay: 0.5s; }
+        
+        .kpi-card {
+            animation: fadeInScale 0.5s ease-out backwards;
+        }
+        
+        .kpi-card:nth-child(1) { animation-delay: 0.1s; }
+        .kpi-card:nth-child(2) { animation-delay: 0.15s; }
+        .kpi-card:nth-child(3) { animation-delay: 0.2s; }
+        .kpi-card:nth-child(4) { animation-delay: 0.25s; }
+        
+        .card {
+            animation: slideInUp 0.6s ease-out backwards;
+        }
+        
+        .card:nth-of-type(1) { animation-delay: 0.3s; }
+        .card:nth-of-type(2) { animation-delay: 0.35s; }
+        .card:nth-of-type(3) { animation-delay: 0.4s; }
+        .card:nth-of-type(4) { animation-delay: 0.45s; }
+        
+        /* Hover glow effect for cards */
+        .widget:hover, .kpi-card:hover, .card:hover {
+            animation: glowPulse 2s ease-in-out infinite;
+        }
+        
         header { 
             text-align: center; 
             padding: 50px 20px 35px;
@@ -1265,6 +1318,344 @@
         
         /* Hidden class for search */
         .hidden { display: none !important; }
+        
+        /* Task Priorities Widget */
+        .priority-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .priority-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            cursor: grab;
+            transition: all 0.2s;
+            border: 2px solid transparent;
+        }
+        
+        .priority-item:hover {
+            background: var(--glass);
+            transform: translateX(4px);
+        }
+        
+        .priority-item.dragging {
+            opacity: 0.5;
+            cursor: grabbing;
+            border-color: var(--accent-primary);
+        }
+        
+        .priority-rank {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+        
+        .priority-rank.p1 { background: linear-gradient(135deg, #ef4444, #f97316); color: white; }
+        .priority-rank.p2 { background: linear-gradient(135deg, #f97316, #eab308); color: white; }
+        .priority-rank.p3 { background: linear-gradient(135deg, #3b82f6, #8b5cf6); color: white; }
+        
+        .priority-text {
+            flex: 1;
+            font-size: 0.85rem;
+            color: var(--text-primary);
+        }
+        
+        .priority-drag-handle {
+            color: var(--text-muted);
+            cursor: grab;
+            font-size: 1rem;
+        }
+        
+        /* Daily Quote Widget */
+        .quote-container {
+            text-align: center;
+            padding: 16px;
+        }
+        
+        .quote-text {
+            font-size: 1rem;
+            font-style: italic;
+            color: var(--text-primary);
+            line-height: 1.5;
+            margin-bottom: 12px;
+            position: relative;
+        }
+        
+        .quote-text::before,
+        .quote-text::after {
+            content: '"';
+            font-size: 1.5rem;
+            color: var(--accent-primary);
+            opacity: 0.5;
+        }
+        
+        .quote-author {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        
+        .quote-refresh {
+            margin-top: 12px;
+            padding: 8px 16px;
+            border: none;
+            border-radius: 8px;
+            background: var(--card-bg);
+            color: var(--text-secondary);
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .quote-refresh:hover {
+            background: var(--accent-primary);
+            color: white;
+        }
+        
+        /* System Stats Widget */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 12px;
+            background: var(--card-bg);
+            border-radius: 12px;
+            transition: all 0.3s;
+        }
+        
+        .stat-item:hover {
+            transform: translateY(-2px);
+        }
+        
+        .stat-icon {
+            font-size: 1.5rem;
+            margin-bottom: 6px;
+        }
+        
+        .stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        
+        .stat-label {
+            font-size: 0.65rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+        
+        .stat-bar {
+            height: 4px;
+            background: var(--card-bg);
+            border-radius: 2px;
+            margin-top: 8px;
+            overflow: hidden;
+        }
+        
+        .stat-bar-fill {
+            height: 100%;
+            border-radius: 2px;
+            transition: width 0.5s ease;
+        }
+        
+        /* Focus Mode */
+        .focus-mode-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--bg-primary);
+            z-index: 5000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .focus-mode-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .focus-mode-content {
+            text-align: center;
+            padding: 40px;
+        }
+        
+        .focus-timer {
+            font-size: 8rem;
+            font-weight: 800;
+            font-family: 'JetBrains Mono', monospace;
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-tertiary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+            margin-bottom: 20px;
+        }
+        
+        .focus-status {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 40px;
+        }
+        
+        .focus-controls {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+        }
+        
+        .focus-btn {
+            padding: 16px 32px;
+            border: none;
+            border-radius: 16px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .focus-btn.primary {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+            color: white;
+        }
+        
+        .focus-btn.secondary {
+            background: var(--card-bg);
+            color: var(--text-secondary);
+        }
+        
+        .focus-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px var(--glow);
+        }
+        
+        .focus-exit {
+            position: absolute;
+            top: 24px;
+            right: 24px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            transition: all 0.2s;
+        }
+        
+        .focus-exit:hover {
+            background: var(--card-bg);
+            color: var(--text-primary);
+        }
+        
+        /* Breathing Animation for Focus Mode */
+        @keyframes breathe {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+        }
+        
+        .focus-breathing {
+            animation: breathe 4s ease-in-out infinite;
+        }
+        
+        /* Confetti Canvas */
+        #confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            z-index: 9999;
+        }
+        
+        /* Smooth scroll behavior */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Scroll to top button */
+        .scroll-top {
+            position: fixed;
+            bottom: 24px;
+            left: 24px;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--glass);
+            backdrop-filter: var(--blur);
+            border: 1px solid var(--card-border);
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .scroll-top.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .scroll-top:hover {
+            background: var(--accent-primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        /* Ambient Sound Toggle */
+        .sound-indicator {
+            position: fixed;
+            bottom: 24px;
+            left: 80px;
+            padding: 8px 16px;
+            background: var(--glass);
+            backdrop-filter: var(--blur);
+            border: 1px solid var(--card-border);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 100;
+        }
+        
+        .sound-indicator.visible {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .sound-indicator.active {
+            color: var(--success);
+        }
     </style>
 </head>
 <body>
@@ -1449,6 +1840,77 @@
                 </div>
                 <!-- GitHub-style Contribution Graph -->
                 <div class="contrib-graph" id="contribGraph"></div>
+            </div>
+
+            <!-- Task Priorities Widget -->
+            <div class="widget">
+                <div class="widget-header">
+                    <div class="widget-icon">📋</div>
+                    <span>Task Priorities</span>
+                </div>
+                <div class="priority-list" id="priorityList">
+                    <div class="priority-item" draggable="true" data-index="0">
+                        <div class="priority-rank p1">1</div>
+                        <span class="priority-text">Completare dashboard Vercel</span>
+                        <span class="priority-drag-handle">⋮⋮</span>
+                    </div>
+                    <div class="priority-item" draggable="true" data-index="1">
+                        <div class="priority-rank p2">2</div>
+                        <span class="priority-text">Revisionare PR su GitHub</span>
+                        <span class="priority-drag-handle">⋮⋮</span>
+                    </div>
+                    <div class="priority-item" draggable="true" data-index="2">
+                        <div class="priority-rank p3">3</div>
+                        <span class="priority-text">Aggiornare documentazione</span>
+                        <span class="priority-drag-handle">⋮⋮</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Daily Quote Widget -->
+            <div class="widget">
+                <div class="widget-header">
+                    <div class="widget-icon">💭</div>
+                    <span>Daily Quote</span>
+                </div>
+                <div class="quote-container">
+                    <div class="quote-text" id="quoteText">"Il successo è la somma di piccoli sforzi ripetuti giorno dopo giorno."</div>
+                    <div class="quote-author" id="quoteAuthor">— Robert Collier</div>
+                    <button class="quote-refresh" id="quoteRefresh">🔄 Nuova citazione</button>
+                </div>
+            </div>
+
+            <!-- System Stats Widget -->
+            <div class="widget">
+                <div class="widget-header">
+                    <div class="widget-icon">⚡</div>
+                    <span>System Stats</span>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-icon">🔋</div>
+                        <div class="stat-value" id="batteryLevel">--%</div>
+                        <div class="stat-label">Battery</div>
+                        <div class="stat-bar">
+                            <div class="stat-bar-fill" id="batteryBar" style="width: 0%; background: var(--success);"></div>
+                        </div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">🌐</div>
+                        <div class="stat-value" id="connectionStatus">--</div>
+                        <div class="stat-label">Connection</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">⏱️</div>
+                        <div class="stat-value" id="uptime">--</div>
+                        <div class="stat-label">Session</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-icon">👁️</div>
+                        <div class="stat-value" id="visitsToday">1</div>
+                        <div class="stat-label">Visits</div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -1744,12 +2206,41 @@
                     <span class="shortcut-desc">Reset Pomodoro</span>
                     <div class="shortcut-keys"><span class="key">R</span></div>
                 </div>
+                <div class="shortcut-item">
+                    <span class="shortcut-desc">Focus Mode</span>
+                    <div class="shortcut-keys"><span class="key">Z</span></div>
+                </div>
             </div>
         </div>
     </div>
 
     <!-- Toast Container -->
     <div class="toast-container" id="toastContainer"></div>
+
+    <!-- Focus Mode Overlay -->
+    <div class="focus-mode-overlay" id="focusModeOverlay">
+        <button class="focus-exit" id="focusExit">×</button>
+        <div class="focus-mode-content">
+            <div class="focus-timer focus-breathing" id="focusTimer">25:00</div>
+            <div class="focus-status" id="focusStatus">Focus Mode Attivo</div>
+            <div class="focus-controls">
+                <button class="focus-btn primary" id="focusToggle">⏸ Pausa</button>
+                <button class="focus-btn secondary" id="focusReset">↺ Reset</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Confetti Canvas -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <!-- Scroll to Top Button -->
+    <button class="scroll-top" id="scrollTop">↑</button>
+
+    <!-- Sound Indicator -->
+    <div class="sound-indicator" id="soundIndicator">
+        <span>🔊</span>
+        <span>Audio attivo</span>
+    </div>
 
     <script>
         // ============ THEME TOGGLE ============
@@ -2206,6 +2697,406 @@
         
         // ============ INIT ============
         showToast('👋 Dashboard caricata', 'Premi ? per gli shortcuts');
+        
+        // ============ TASK PRIORITIES - DRAG & DROP ============
+        const priorityList = document.getElementById('priorityList');
+        let draggedItem = null;
+        
+        function initDragAndDrop() {
+            const items = priorityList.querySelectorAll('.priority-item');
+            items.forEach(item => {
+                item.addEventListener('dragstart', function(e) {
+                    draggedItem = this;
+                    this.classList.add('dragging');
+                    e.dataTransfer.effectAllowed = 'move';
+                });
+                
+                item.addEventListener('dragend', function() {
+                    this.classList.remove('dragging');
+                    draggedItem = null;
+                    updatePriorityRanks();
+                    playSound('drop');
+                });
+                
+                item.addEventListener('dragover', function(e) {
+                    e.preventDefault();
+                    if (this !== draggedItem) {
+                        const rect = this.getBoundingClientRect();
+                        const midY = rect.top + rect.height / 2;
+                        if (e.clientY < midY) {
+                            priorityList.insertBefore(draggedItem, this);
+                        } else {
+                            priorityList.insertBefore(draggedItem, this.nextSibling);
+                        }
+                    }
+                });
+            });
+        }
+        
+        function updatePriorityRanks() {
+            const items = priorityList.querySelectorAll('.priority-item');
+            items.forEach((item, index) => {
+                const rank = item.querySelector('.priority-rank');
+                rank.textContent = index + 1;
+                rank.className = 'priority-rank p' + (index < 3 ? index + 1 : 3);
+            });
+        }
+        
+        initDragAndDrop();
+        
+        // ============ DAILY QUOTE ============
+        const quotes = [
+            { text: "Il successo è la somma di piccoli sforzi ripetuti giorno dopo giorno.", author: "Robert Collier" },
+            { text: "Non importa quanto lentamente vai, purché non ti fermi.", author: "Confucio" },
+            { text: "La disciplina è il ponte tra obiettivi e risultati.", author: "Jim Rohn" },
+            { text: "Il modo migliore per predire il futuro è crearlo.", author: "Peter Drucker" },
+            { text: "Ogni esperto è stato un principiante.", author: "Helen Hayes" },
+            { text: "La produttività non è fare di più, ma fare ciò che conta.", author: "Greg McKeown" },
+            { text: "Il tempo è ciò che più desideriamo e ciò che usiamo peggio.", author: "William Penn" },
+            { text: "La costanza batte il talento quando il talento non è costante.", author: "Tim Notke" },
+            { text: "Non aspettare. Non sarà mai il momento giusto.", author: "Napoleon Hill" },
+            { text: "Piccole azioni quotidiane creano risultati straordinari.", author: "Darren Hardy" }
+        ];
+        
+        function loadDailyQuote() {
+            const today = new Date().toDateString();
+            const saved = localStorage.getItem('dailyQuote');
+            const savedDate = localStorage.getItem('dailyQuoteDate');
+            
+            if (saved && savedDate === today) {
+                const quote = JSON.parse(saved);
+                document.getElementById('quoteText').textContent = '"' + quote.text + '"';
+                document.getElementById('quoteAuthor').textContent = '— ' + quote.author;
+            } else {
+                const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+                document.getElementById('quoteText').textContent = '"' + randomQuote.text + '"';
+                document.getElementById('quoteAuthor').textContent = '— ' + randomQuote.author;
+                localStorage.setItem('dailyQuote', JSON.stringify(randomQuote));
+                localStorage.setItem('dailyQuoteDate', today);
+            }
+        }
+        
+        document.getElementById('quoteRefresh').addEventListener('click', function() {
+            const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+            document.getElementById('quoteText').textContent = '"' + randomQuote.text + '"';
+            document.getElementById('quoteAuthor').textContent = '— ' + randomQuote.author;
+            playSound('click');
+        });
+        
+        loadDailyQuote();
+        
+        // ============ SYSTEM STATS ============
+        async function initSystemStats() {
+            // Battery
+            if ('getBattery' in navigator) {
+                try {
+                    const battery = await navigator.getBattery();
+                    updateBattery(battery);
+                    battery.addEventListener('levelchange', () => updateBattery(battery));
+                    battery.addEventListener('chargingchange', () => updateBattery(battery));
+                } catch (e) {
+                    document.getElementById('batteryLevel').textContent = 'N/A';
+                }
+            } else {
+                document.getElementById('batteryLevel').textContent = 'N/A';
+            }
+            
+            // Connection
+            updateConnection();
+            window.addEventListener('online', updateConnection);
+            window.addEventListener('offline', updateConnection);
+            
+            // Uptime
+            const sessionStart = Date.now();
+            setInterval(() => {
+                const elapsed = Math.floor((Date.now() - sessionStart) / 1000);
+                const hours = Math.floor(elapsed / 3600);
+                const mins = Math.floor((elapsed % 3600) / 60);
+                document.getElementById('uptime').textContent = 
+                    hours > 0 ? `${hours}h ${mins}m` : `${mins}m`;
+            }, 60000);
+            document.getElementById('uptime').textContent = '0m';
+            
+            // Visits
+            const today = new Date().toDateString();
+            const lastVisit = localStorage.getItem('lastVisitDate');
+            let visits = parseInt(localStorage.getItem('visitsToday') || '0');
+            if (lastVisit !== today) {
+                visits = 1;
+                localStorage.setItem('lastVisitDate', today);
+            } else {
+                visits++;
+            }
+            localStorage.setItem('visitsToday', visits);
+            document.getElementById('visitsToday').textContent = visits;
+        }
+        
+        function updateBattery(battery) {
+            const level = Math.round(battery.level * 100);
+            document.getElementById('batteryLevel').textContent = level + '%';
+            document.getElementById('batteryBar').style.width = level + '%';
+            document.getElementById('batteryBar').style.background = 
+                level > 50 ? 'var(--success)' : level > 20 ? 'var(--warning)' : '#ef4444';
+        }
+        
+        function updateConnection() {
+            const status = navigator.onLine ? '🟢' : '🔴';
+            const text = navigator.onLine ? 'Online' : 'Offline';
+            document.getElementById('connectionStatus').textContent = status;
+            document.getElementById('connectionStatus').title = text;
+        }
+        
+        initSystemStats();
+        
+        // ============ FOCUS MODE ============
+        const focusOverlay = document.getElementById('focusModeOverlay');
+        const focusTimer = document.getElementById('focusTimer');
+        const focusStatus = document.getElementById('focusStatus');
+        const focusToggle = document.getElementById('focusToggle');
+        const focusReset = document.getElementById('focusReset');
+        const focusExit = document.getElementById('focusExit');
+        
+        let focusTimeLeft = 25 * 60;
+        let focusInterval = null;
+        let focusRunning = false;
+        
+        function openFocusMode() {
+            focusOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            updateFocusDisplay();
+            playSound('focus');
+        }
+        
+        function closeFocusMode() {
+            focusOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+        
+        function updateFocusDisplay() {
+            const mins = Math.floor(focusTimeLeft / 60);
+            const secs = focusTimeLeft % 60;
+            focusTimer.textContent = `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
+        }
+        
+        function toggleFocusTimer() {
+            if (focusRunning) {
+                clearInterval(focusInterval);
+                focusRunning = false;
+                focusToggle.textContent = '▶ Resume';
+                focusStatus.textContent = 'Focus Mode - Pausa';
+                focusTimer.classList.remove('focus-breathing');
+            } else {
+                focusRunning = true;
+                focusToggle.textContent = '⏸ Pausa';
+                focusStatus.textContent = 'Focus Mode Attivo';
+                focusTimer.classList.add('focus-breathing');
+                focusInterval = setInterval(() => {
+                    if (focusTimeLeft > 0) {
+                        focusTimeLeft--;
+                        updateFocusDisplay();
+                    } else {
+                        clearInterval(focusInterval);
+                        focusRunning = false;
+                        focusToggle.textContent = '▶ Start';
+                        focusStatus.textContent = 'Focus Completato!';
+                        focusTimer.classList.remove('focus-breathing');
+                        fireConfetti();
+                        playSound('complete');
+                        showToast('🎯 Focus completato!', 'Ottimo lavoro!');
+                    }
+                }, 1000);
+            }
+        }
+        
+        function resetFocusTimer() {
+            clearInterval(focusInterval);
+            focusRunning = false;
+            focusTimeLeft = 25 * 60;
+            updateFocusDisplay();
+            focusToggle.textContent = '▶ Start';
+            focusStatus.textContent = 'Focus Mode - Pronto';
+            focusTimer.classList.remove('focus-breathing');
+        }
+        
+        focusToggle.addEventListener('click', toggleFocusTimer);
+        focusReset.addEventListener('click', resetFocusTimer);
+        focusExit.addEventListener('click', closeFocusMode);
+        
+        // Add focus mode to keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+            if (e.key === 'z' || e.key === 'Z') {
+                openFocusMode();
+            }
+        });
+        
+        // ============ CONFETTI EFFECT ============
+        const confettiCanvas = document.getElementById('confetti-canvas');
+        const confettiCtx = confettiCanvas.getContext('2d');
+        let confettiParticles = [];
+        
+        function resizeConfettiCanvas() {
+            confettiCanvas.width = window.innerWidth;
+            confettiCanvas.height = window.innerHeight;
+        }
+        resizeConfettiCanvas();
+        window.addEventListener('resize', resizeConfettiCanvas);
+        
+        function fireConfetti() {
+            const colors = ['#6366f1', '#8b5cf6', '#ec4899', '#22c55e', '#3b82f6', '#f59e0b'];
+            for (let i = 0; i < 150; i++) {
+                confettiParticles.push({
+                    x: window.innerWidth / 2,
+                    y: window.innerHeight / 2,
+                    vx: (Math.random() - 0.5) * 20,
+                    vy: (Math.random() - 0.5) * 20 - 5,
+                    color: colors[Math.floor(Math.random() * colors.length)],
+                    size: Math.random() * 8 + 4,
+                    rotation: Math.random() * 360,
+                    rotationSpeed: (Math.random() - 0.5) * 10,
+                    life: 1
+                });
+            }
+            animateConfetti();
+        }
+        
+        function animateConfetti() {
+            if (confettiParticles.length === 0) return;
+            
+            confettiCtx.clearRect(0, 0, confettiCanvas.width, confettiCanvas.height);
+            
+            confettiParticles = confettiParticles.filter(p => {
+                p.x += p.vx;
+                p.y += p.vy;
+                p.vy += 0.3; // gravity
+                p.rotation += p.rotationSpeed;
+                p.life -= 0.008;
+                
+                if (p.life > 0) {
+                    confettiCtx.save();
+                    confettiCtx.translate(p.x, p.y);
+                    confettiCtx.rotate(p.rotation * Math.PI / 180);
+                    confettiCtx.fillStyle = p.color;
+                    confettiCtx.globalAlpha = p.life;
+                    confettiCtx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size);
+                    confettiCtx.restore();
+                    return true;
+                }
+                return false;
+            });
+            
+            requestAnimationFrame(animateConfetti);
+        }
+        
+        // ============ SOUND EFFECTS ============
+        const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const soundIndicator = document.getElementById('soundIndicator');
+        let soundEnabled = true;
+        
+        function playSound(type) {
+            if (!soundEnabled) return;
+            
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            switch(type) {
+                case 'click':
+                    oscillator.frequency.value = 800;
+                    gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.1);
+                    oscillator.start(audioContext.currentTime);
+                    oscillator.stop(audioContext.currentTime + 0.1);
+                    break;
+                case 'complete':
+                    oscillator.frequency.value = 523.25; // C5
+                    gainNode.gain.setValueAtTime(0.2, audioContext.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+                    oscillator.start(audioContext.currentTime);
+                    oscillator.stop(audioContext.currentTime + 0.5);
+                    // Second note
+                    setTimeout(() => {
+                        const osc2 = audioContext.createOscillator();
+                        const gain2 = audioContext.createGain();
+                        osc2.connect(gain2);
+                        gain2.connect(audioContext.destination);
+                        osc2.frequency.value = 659.25; // E5
+                        gain2.gain.setValueAtTime(0.2, audioContext.currentTime);
+                        gain2.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+                        osc2.start(audioContext.currentTime);
+                        osc2.stop(audioContext.currentTime + 0.5);
+                    }, 100);
+                    break;
+                case 'drop':
+                    oscillator.frequency.value = 400;
+                    gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.15);
+                    oscillator.start(audioContext.currentTime);
+                    oscillator.stop(audioContext.currentTime + 0.15);
+                    break;
+                case 'focus':
+                    oscillator.frequency.value = 300;
+                    gainNode.gain.setValueAtTime(0.05, audioContext.currentTime);
+                    gainNode.gain.linearRampToValueAtTime(0.1, audioContext.currentTime + 0.5);
+                    gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 2);
+                    oscillator.start(audioContext.currentTime);
+                    oscillator.stop(audioContext.currentTime + 2);
+                    break;
+            }
+            
+            soundIndicator.classList.add('visible');
+            setTimeout(() => soundIndicator.classList.remove('visible'), 2000);
+        }
+        
+        // Enable audio on first interaction
+        document.addEventListener('click', () => {
+            if (audioContext.state === 'suspended') {
+                audioContext.resume();
+            }
+        }, { once: true });
+        
+        // ============ SCROLL TO TOP ============
+        const scrollTopBtn = document.getElementById('scrollTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                scrollTopBtn.classList.add('visible');
+            } else {
+                scrollTopBtn.classList.remove('visible');
+            }
+        });
+        
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            playSound('click');
+        });
+        
+        // ============ HAPTIC FEEDBACK ============
+        function hapticFeedback(type = 'light') {
+            if ('vibrate' in navigator) {
+                switch(type) {
+                    case 'light':
+                        navigator.vibrate(10);
+                        break;
+                    case 'medium':
+                        navigator.vibrate(20);
+                        break;
+                    case 'heavy':
+                        navigator.vibrate([30, 50, 30]);
+                        break;
+                }
+            }
+        }
+        
+        // Add haptic to buttons
+        document.querySelectorAll('button, .kpi-card, .project-item').forEach(el => {
+            el.addEventListener('click', () => hapticFeedback('light'));
+        });
+        
+        // Add haptic to priority drag
+        priorityList.addEventListener('dragend', () => hapticFeedback('medium'));
     </script>
 </body>
 </html>
