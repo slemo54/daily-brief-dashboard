@@ -1,4 +1,5 @@
 import { RocketbookNote, LifeQuest, GitHubProject, AINewsItem, WeatherData, LifeQuestHabit } from '@/lib/types';
+import { fetchRealAINews } from '@/lib/ai-news';
 
 // Life Quests Habits Configuration
 export const lifeQuestHabits: LifeQuestHabit[] = [
@@ -141,23 +142,8 @@ export async function getGitHubProjects(): Promise<GitHubProject[]> {
 }
 
 export async function getAINews(): Promise<AINewsItem[]> {
-  // Sample AI news - in production this would come from an API
-  return [
-    {
-      title: 'OpenAI rilascia GPT-5',
-      source: 'TechCrunch',
-      url: '#',
-      summary: 'Nuovo modello con capacità avanzate di ragionamento',
-      publishedAt: new Date().toISOString(),
-    },
-    {
-      title: 'Google DeepMind annuncia nuovo breakthrough',
-      source: 'The Verge',
-      url: '#',
-      summary: 'Progressi significativi nella ricerca scientifica',
-      publishedAt: new Date().toISOString(),
-    },
-  ];
+  // Fetch real AI news from HackerNews
+  return fetchRealAINews();
 }
 
 export async function getWeatherData(): Promise<WeatherData> {
