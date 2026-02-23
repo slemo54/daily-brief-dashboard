@@ -9,19 +9,28 @@ export interface Recipe {
   tags: string[];
   ingredients: Ingredient[];
   instructions: string[];
-  weatherSuitable: ('sunny' | 'rainy' | 'cold' | 'hot' | 'cloudy')[];
+  weatherSuitable: ('sunny' | 'rainy' | 'cold' | 'hot' | 'cloudy' | 'weekend' | 'summer')[];
   image?: string;
+  mealType?: 'breakfast' | 'lunch' | 'dinner';
+  macros?: {
+    protein: number;
+    carbs: number;
+    fats: number;
+    calories: number;
+  };
+  notes?: string;
 }
 
 export interface Ingredient {
   name: string;
   amount: string;
-  store: 'lidl' | 'migross' | 'esselunga' | 'any';
+  store: 'lidl' | 'migross' | 'esselunga' | 'any' | 'Lidl' | 'Migross' | '-';
   aisle: string;
 }
 
 export interface MealPlan {
   date: string;
+  breakfast?: Recipe;
   lunch?: Recipe;
   dinner: Recipe;
   weather?: WeatherData;

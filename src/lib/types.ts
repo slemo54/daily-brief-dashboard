@@ -53,3 +53,21 @@ export interface CountdownEvent {
   date: string;
   emoji: string;
 }
+
+export interface LifeQuestHabit {
+  id: string;
+  name: string;
+  time: string;
+  days: number[]; // 0 = Sunday, 1 = Monday, etc.
+  category: 'fitness' | 'learning' | 'work' | 'wellness' | 'creative';
+  duration?: string;
+  description?: string;
+}
+
+export interface CalendarSyncResult {
+  habitId: string;
+  habitName: string;
+  scheduledTime: string;
+  status: 'scheduled' | 'skipped' | 'error';
+  message?: string;
+}

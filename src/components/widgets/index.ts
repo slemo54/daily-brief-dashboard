@@ -9,3 +9,4 @@ export { AINewsWidget } from './AINewsWidget';
 export { TaskPrioritiesWidget } from './TaskPrioritiesWidget';
 export { RocketbookWidget } from './RocketbookWidget';
 export { MealPlannerWidget } from './MealPlannerWidget';
+export { EmailAssistantWidget } from './EmailAssistantWidget';

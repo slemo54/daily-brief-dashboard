@@ -1,4 +1,89 @@
-import { RocketbookNote, LifeQuest, GitHubProject, AINewsItem, WeatherData } from '@/lib/types';
+import { RocketbookNote, LifeQuest, GitHubProject, AINewsItem, WeatherData, LifeQuestHabit } from '@/lib/types';
+
+// Life Quests Habits Configuration
+export const lifeQuestHabits: LifeQuestHabit[] = [
+  {
+    id: 'pushups',
+    name: 'Pushups',
+    time: '07:00',
+    days: [1, 2, 3, 4, 5, 6], // Monday-Saturday
+    category: 'fitness',
+    duration: '15 min',
+    description: 'Morning strength routine',
+  },
+  {
+    id: 'ted-talk',
+    name: 'Ted Talk',
+    time: '08:00',
+    days: [1, 2, 3, 4, 5], // Weekdays
+    category: 'learning',
+    duration: '20 min',
+    description: 'Daily inspiration & knowledge',
+  },
+  {
+    id: 'check-notes',
+    name: 'Check Notes',
+    time: '09:00',
+    days: [1, 2, 3, 4, 5], // Weekdays
+    category: 'work',
+    duration: '10 min',
+    description: 'Review Rocketbook & daily tasks',
+  },
+  {
+    id: 'side-job-1h',
+    name: 'Side Job',
+    time: '14:00',
+    days: [1, 3, 5], // Mon, Wed, Fri
+    category: 'work',
+    duration: '1 hour',
+    description: 'Autoblogger / Bookingolf / Personal projects',
+  },
+  {
+    id: 'side-job-2h',
+    name: 'Side Job (Deep Work)',
+    time: '14:00',
+    days: [2, 4], // Tue, Thu
+    category: 'work',
+    duration: '2 hours',
+    description: 'Autoblogger / Bookingolf / Personal projects',
+  },
+  {
+    id: 'storytelling',
+    name: 'Storytell',
+    time: '21:00',
+    days: [0, 1, 2, 3, 4, 5, 6], // Daily
+    category: 'creative',
+    duration: '30 min',
+    description: 'Writing, content creation, narrative practice',
+  },
+  {
+    id: 'yoga',
+    name: 'Yoga',
+    time: '07:00',
+    days: [0, 3], // Sunday, Wednesday
+    category: 'wellness',
+    duration: '30 min',
+    description: 'Flexibility & mindfulness practice',
+  },
+  {
+    id: 'reading',
+    name: 'Leggere',
+    time: '22:00',
+    days: [0, 2, 4, 6], // Sun, Tue, Thu, Sat
+    category: 'learning',
+    duration: '30 min',
+    description: 'Book reading session',
+  },
+  {
+    id: 'brilliant',
+    name: 'Brilliant',
+    time: '10:00',
+    days: [0], // Sunday only
+    category: 'learning',
+    duration: '45 min',
+    description: 'Interactive math & science learning',
+  },
+];
 
 export async function getRocketbookNotes(): Promise<RocketbookNote[]> {
   try {
@@ -84,4 +169,23 @@ export async function getWeatherData(): Promise<WeatherData> {
     wind: 8,
     icon: '⛅',
   };
+}
+
+// Get habits scheduled for a specific day
+export function getHabitsForDay(date: Date = new Date()): LifeQuestHabit[] {
+  const dayOfWeek = date.getDay(); // 0 = Sunday, 1 = Monday, etc.
+  return lifeQuestHabits.filter(habit => habit.days.includes(dayOfWeek));
+}
+
+// Get habits for today formatted for display
+export function getTodaysSchedule(date: Date = new Date()): { time: string; name: string; category: string; duration: string }[] {
+  const habits = getHabitsForDay(date);
+  return habits
+    .sort((a, b) => a.time.localeCompare(b.time))
+    .map(habit => ({
+      time: habit.time,
+      name: habit.name,
+      category: habit.category,
+      duration: habit.duration || '15 min',
+    }));
 }

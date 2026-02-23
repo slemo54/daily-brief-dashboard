@@ -1,8 +1,6 @@
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
 import { Play, Pause, RotateCcw } from 'lucide-react';
 
 const POMODORO_MINUTES = 25;
@@ -52,47 +50,84 @@ export function PomodoroWidget() {
     return `${mins.toString().padStart(2, '0')}:${secs.toString().padStart(2, '0')}`;
   };
 
-  const progress = ((mode === 'work' ? POMODORO_MINUTES * 60 : mode === 'short' ? SHORT_BREAK * 60 : LONG_BREAK * 60) - timeLeft) / 
-    (mode === 'work' ? POMODORO_MINUTES * 60 : mode === 'short' ? SHORT_BREAK * 60 : LONG_BREAK * 60) * 100;
-
-  const modeColors = {
-    work: 'from-red-500/20 to-orange-500/20 border-red-500/30',
-    short: 'from-green-500/20 to-emerald-500/20 border-green-500/30',
-    long: 'from-blue-500/20 to-cyan-500/20 border-blue-500/30',
+  const getTotalTime = () => {
+    if (mode === 'work') return POMODORO_MINUTES * 60;
+    if (mode === 'short') return SHORT_BREAK * 60;
+    return LONG_BREAK * 60;
   };
 
+  const progress = ((getTotalTime() - timeLeft) / getTotalTime()) * 100;
+  const circumference = 2 * Math.PI * 45;
+  const strokeDashoffset = circumference - (progress / 100) * circumference;
+
+  const modeConfig = {
+    work: { label: 'Focus', color: '#ff6b4a', bgColor: 'rgba(255, 107, 74, 0.1)' },
+    short: { label: 'Pausa Breve', color: '#3b82f6', bgColor: 'rgba(59, 130, 246, 0.1)' },
+    long: { label: 'Pausa Lunga', color: '#8b5cf6', bgColor: 'rgba(139, 92, 246, 0.1)' },
+  };
+
+  const currentMode = modeConfig[mode];
+
   return (
-    <Card className={`bg-gradient-to-br ${modeColors[mode]}`}>
-      <CardHeader className="pb-2">
-        <CardTitle className="text-sm font-medium text-muted-foreground flex justify-between">
-          <span>🍅 Pomodoro</span>
-          <span className="text-xs">Cicli: {cycles}</span>
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="p-6">
-        <div className="text-center">
-          <div className="text-5xl font-bold mb-2">{formatTime(timeLeft)}</div>
-          <div className="text-sm text-muted-foreground mb-4 capitalize">
-            {mode === 'work' ? 'Focus' : mode === 'short' ? 'Pausa breve' : 'Pausa lunga'}
-          </div>
-          
-          <div className="w-full bg-secondary h-2 rounded-full mb-4">
-            <div 
-              className="h-full rounded-full bg-primary transition-all duration-1000"
-              style={{ width: `${progress}%` }}
+    <div className="glass-card p-5" style={{ backgroundColor: currentMode.bgColor }}>
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center gap-2">
+          <span className="text-lg">🍅</span>
+          <span className="text-sm font-medium text-[#9ca3af]">Pomodoro</span>
+        </div>
+        <span className="text-xs text-[#6b7280]">Cicli: {cycles}</span>
+      </div>
+
+      <div className="flex flex-col items-center">
+        {/* Circular Progress */}
+        <div className="relative w-32 h-32 mb-4">
+          <svg className="w-full h-full transform -rotate-90" viewBox="0 0 100 100">
+            <circle
+              cx="50"
+              cy="50"
+              r="45"
+              fill="none"
+              stroke="#2a2a2a"
+              strokeWidth="6"
             />
-          </div>
+            <circle
+              cx="50"
+              cy="50"
+              r="45"
+              fill="none"
+              stroke={currentMode.color}
+              strokeWidth="6"
+              strokeLinecap="round"
+              strokeDasharray={circumference}
+              strokeDashoffset={strokeDashoffset}
+              className="transition-all duration-1000 ease-linear"
+            />
+          </svg>
           
-          <div className="flex justify-center gap-2">
-            <Button size="sm" onClick={toggleTimer}>
-              {isActive ? <Pause className="w-4 h-4" /> : <Play className="w-4 h-4" />}
-            </Button>
-            <Button size="sm" variant="outline" onClick={resetTimer}>
-              <RotateCcw className="w-4 h-4" />
-            </Button>
+          <div className="absolute inset-0 flex flex-col items-center justify-center">
+            <div className="text-2xl font-bold text-[#ebebeb]">{formatTime(timeLeft)}</div>
+            <div className="text-xs text-[#6b7280]" style={{ color: currentMode.color }}>
+              {currentMode.label}
+            </div>
           </div>
         </div>
-      </CardContent>
-    </Card>
+
+        {/* Controls */}
+        <div className="flex gap-2">
+          <button
+            onClick={toggleTimer}
+            className="btn-primary w-12 h-12 rounded-xl flex items-center justify-center"
+          >
+            {isActive ? <Pause className="w-5 h-5 text-white" /> : <Play className="w-5 h-5 text-white ml-0.5" />}
+          </button>
+          <button
+            onClick={resetTimer}
+            className="btn-glass w-12 h-12 rounded-xl flex items-center justify-center"
+          >
+            <RotateCcw className="w-5 h-5 text-[#9ca3af]" />
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }

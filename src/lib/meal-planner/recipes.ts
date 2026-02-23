@@ -1,418 +1,411 @@
 import { Recipe, MealPlan, ShoppingItem, WeatherForecast } from './types';
 
-// RICETTE ADATTATE PER: 190cm, 85kg, in allenamento
-// Focus: proteine, porzioni generose, calorie sufficienti
+// RICETTE REALI DI ANSELMO - 1 persona, 30-35€/settimana
+// Focus: budget-conscious, ingredienti da Migross (freschi) e Lidl (dispensa)
+// Struttura: Colazione (8:00) + Pranzo (13:00) + Cena (20:00)
+// Adattate per atleta 190cm/85kg - porzioni aumentate dove necessario
 
 export const recipes: Recipe[] = [
-  // PASTA - porzioni 120-150g pasta secca (80g = 1 porzione standard)
+  // ========== COLAZIONE (8:00) ==========
   {
-    id: 'pasta-pomodoro',
-    name: 'Pasta al Pomodoro (doppia porzione)',
+    id: 'colazione-pancake',
+    name: 'Pancake (3 pezzi)',
     chef: 'me',
     prepTime: 15,
     difficulty: 'easy',
-    tags: ['pasta', 'vegetarian', 'quick', 'carbs'],
+    tags: ['colazione', 'sweet', 'quick', 'budget'],
+    mealType: 'breakfast',
+    macros: { protein: 12, carbs: 45, fats: 15, calories: 380 },
     ingredients: [
-      { name: 'Pasta', amount: '500g', store: 'any', aisle: 'Pasta' },
-      { name: 'Pomodori pelati', amount: '800g', store: 'any', aisle: 'Salse' },
-      { name: 'Aglio', amount: '3 spicchi', store: 'any', aisle: 'Ortofrutta' },
-      { name: 'Olio EVO', amount: '4 cucchiai', store: 'any', aisle: 'Oli' },
-      { name: 'Parmigiano', amount: '100g', store: 'any', aisle: 'Formaggi' },
+      { name: 'Farina', amount: '1/2 tazza (75g)', store: 'Lidl', aisle: 'Panetteria' },
+      { name: 'Lievito in polvere', amount: '1 cucchiaino', store: 'Lidl', aisle: 'Panetteria' },
+      { name: 'Bicarbonato', amount: 'pizzico', store: 'Lidl', aisle: 'Panetteria' },
+      { name: 'Zucchero', amount: '1 cucchiaio', store: 'Lidl', aisle: 'Panetteria' },
+      { name: 'Sale', amount: 'pizzico', store: 'Lidl', aisle: 'Condimenti' },
+      { name: 'Latte', amount: '1/4 tazza (60ml)', store: 'Migross', aisle: 'Latticini' },
+      { name: 'Uova', amount: '1', store: 'Migross', aisle: 'Latticini' },
+      { name: 'Olio', amount: '1 cucchiaio', store: 'Lidl', aisle: 'Oli' },
+      { name: 'Vaniglia', amount: '1/2 cucchiaino', store: 'Lidl', aisle: 'Dolci' },
     ],
     instructions: [
-      'Soffriggere l\'aglio in olio',
-      'Aggiungere pomodori e cuocere 10 minuti',
-      'Cuocere la pasta al dente (500g = 2 porzioni)',
-      'Mantecare pasta con il sugo',
-      'Abbondante parmigiano'
+      'Mescolare farina, lievito, bicarbonato, zucchero e sale',
+      'In un\'altra ciotola sbattere uovo, latte, olio e vaniglia',
+      'Unire gli ingredienti secchi a quelli liquidi',
+      'Cuocere in padella antiaderente 2-3 minuti per lato',
+      'Varianti: aggiungere banana, mirtilli o cannella'
     ],
-    weatherSuitable: ['sunny', 'rainy', 'cold', 'hot'],
+    weatherSuitable: ['sunny', 'cloudy', 'cold', 'hot'],
+    notes: 'Conservazione: 2-3 giorni in frigo. Per atleta: raddoppiare la dose (6 pancake)'
   },
   {
-    id: 'pasta-aglio-olio',
-    name: 'Spaghetti Aglio e Olio (doppia porzione)',
+    id: 'colazione-frittata',
+    name: 'Frittata',
     chef: 'me',
     prepTime: 10,
     difficulty: 'easy',
-    tags: ['pasta', 'vegetarian', 'quick', 'carbs'],
+    tags: ['colazione', 'protein', 'savory', 'portable', 'budget'],
+    mealType: 'breakfast',
+    macros: { protein: 18, carbs: 8, fats: 22, calories: 320 },
     ingredients: [
-      { name: 'Spaghetti', amount: '500g', store: 'any', aisle: 'Pasta' },
-      { name: 'Aglio', amount: '6 spicchi', store: 'any', aisle: 'Ortofrutta' },
-      { name: 'Olio EVO', amount: '6 cucchiai', store: 'any', aisle: 'Oli' },
-      { name: 'Peperoncino', amount: 'q.b.', store: 'any', aisle: 'Spezie' },
-      { name: 'Prezzemolo', amount: 'q.b.', store: 'any', aisle: 'Erbe' },
+      { name: 'Uova', amount: '3', store: 'Migross', aisle: 'Latticini' },
+      { name: 'Verdure a piacere', amount: 'q.b.', store: 'Migross', aisle: 'Ortofrutta' },
+      { name: 'Olio', amount: '1 cucchiaio', store: 'Lidl', aisle: 'Oli' },
+      { name: 'Sale e pepe', amount: 'q.b.', store: 'Lidl', aisle: 'Condimenti' },
     ],
     instructions: [
+      'Sbattere le uova con sale e pepe',
+      'Tagliare le verdure a pezzetti',
+      'Scaldare l\'olio in padella',
+      'Cuocere le verdure 3-4 minuti',
+      'Versare le uova e cuocere 3-4 minuti per lato'
+    ],
+    weatherSuitable: ['sunny', 'cloudy', 'cold', 'hot'],
+    notes: 'Buona anche fredda, perfetta per pranzo al lavoro'
+  },
+
+  // ========== PRANZO/CENA ==========
+  {
+    id: 'polenta-uovo',
+    name: 'Polenta con Uovo',
+    chef: 'me',
+    prepTime: 15,
+    difficulty: 'easy',
+    tags: ['pranzo', 'cena', 'comfort', 'budget', 'quick'],
+    mealType: 'lunch',
+    macros: { protein: 14, carbs: 35, fats: 18, calories: 380 },
+    ingredients: [
+      { name: 'Farina per polenta', amount: '50g', store: 'Lidl', aisle: 'Cereali' },
+      { name: 'Acqua', amount: '200ml', store: '-', aisle: '-' },
+      { name: 'Uova', amount: '1', store: 'Migross', aisle: 'Latticini' },
+      { name: 'Olio', amount: '1 cucchiaio', store: 'Lidl', aisle: 'Oli' },
+      { name: 'Sale', amount: 'q.b.', store: 'Lidl', aisle: 'Condimenti' },
+    ],
+    instructions: [
+      'Portare l\'acqua a bollore con sale',
+      'Versare la farina a pioggia mescolando',
+      'Cuocere 8-10 minuti mescolando',
+      'Friggere o cuocere l\'uovo in camicia',
+      'Servire l\'uovo sulla polenta calda'
+    ],
+    weatherSuitable: ['cold', 'rainy', 'cloudy'],
+    notes: 'Per atleta: aggiungere formaggio grattugiato'
+  },
+  {
+    id: 'tacos-pollo',
+    name: 'Tacos di Pollo',
+    chef: 'me',
+    prepTime: 20,
+    difficulty: 'easy',
+    tags: ['pranzo', 'cena', 'protein', 'mexican', 'budget'],
+    mealType: 'lunch',
+    macros: { protein: 35, carbs: 30, fats: 15, calories: 420 },
+    ingredients: [
+      { name: 'Petto di pollo', amount: '200g', store: 'Migross', aisle: 'Carne' },
+      { name: 'Tortillas', amount: '2', store: 'Lidl', aisle: 'Panetteria' },
+      { name: 'Paprika', amount: '1 cucchiaino', store: 'Lidl', aisle: 'Spezie' },
+      { name: 'Cumino', amount: '1/2 cucchiaino', store: 'Lidl', aisle: 'Spezie' },
+      { name: 'Aglio', amount: '1 spicchio', store: 'Migross', aisle: 'Ortofrutta' },
+      { name: 'Cipolla', amount: '1/2', store: 'Migross', aisle: 'Ortofrutta' },
+      { name: 'Olio', amount: '1 cucchiaio', store: 'Lidl', aisle: 'Oli' },
+    ],
+    instructions: [
+      'Tagliare il pollo a strisce sottili',
+      'Mescolare paprika, cumino e sale',
+      'Insaporire il pollo con le spezie',
+      'Soffriggere aglio e cipolla, aggiungere pollo',
+      'Cuocere 8-10 minuti e servire nelle tortillas'
+    ],
+    weatherSuitable: ['sunny', 'hot'],
+    notes: 'Per atleta: aggiungere fagioli neri'
+  },
+  {
+    id: 'pasta-fagioli',
+    name: 'Pasta e Fagioli',
+    chef: 'me',
+    prepTime: 25,
+    difficulty: 'easy',
+    tags: ['pranzo', 'cena', 'comfort', 'budget', 'italian'],
+    mealType: 'lunch',
+    macros: { protein: 18, carbs: 65, fats: 12, calories: 480 },
+    ingredients: [
+      { name: 'Pasta', amount: '100g', store: 'Lidl', aisle: 'Pasta' },
+      { name: 'Fagioli borlotti', amount: '1 scatola (240g)', store: 'Lidl', aisle: 'Conserve' },
+      { name: 'Passata di pomodoro', amount: '200g', store: 'Lidl', aisle: 'Conserve' },
+      { name: 'Cipolla', amount: '1/2', store: 'Migross', aisle: 'Ortofrutta' },
+      { name: 'Aglio', amount: '1 spicchio', store: 'Migross', aisle: 'Ortofrutta' },
+      { name: 'Olio', amount: '2 cucchiai', store: 'Lidl', aisle: 'Oli' },
+      { name: 'Rosmarino', amount: 'q.b.', store: 'Lidl', aisle: 'Spezie' },
+    ],
+    instructions: [
+      'Soffriggere cipolla e aglio nell\'olio',
+      'Aggiungere passata e cuocere 10 minuti',
+      'Aggiungere fagioli scolati e rosmarino',
       'Cuocere la pasta al dente',
-      'Soffriggere abbondante aglio e peperoncino',
-      'Scolare pasta conservando acqua',
-      'Saltare pasta in padella',
-      'Aggiungere prezzemolo'
+      'Mantecare tutto insieme e servire'
     ],
-    weatherSuitable: ['sunny', 'hot'],
+    weatherSuitable: ['cold', 'rainy', 'cloudy'],
+    notes: 'Per atleta: aumentare pasta a 120g'
   },
   {
-    id: 'pasta-salsiccia',
-    name: 'Pasta con Salsiccia (doppia porzione)',
-    chef: 'me',
-    prepTime: 20,
-    difficulty: 'easy',
-    tags: ['pasta', 'meat', 'quick', 'protein'],
-    ingredients: [
-      { name: 'Pasta', amount: '500g', store: 'any', aisle: 'Pasta' },
-      { name: 'Salsicce', amount: '600g', store: 'any', aisle: 'Carne' },
-      { name: 'Cipolla', amount: '1 grande', store: 'any', aisle: 'Ortofrutta' },
-      { name: 'Vino bianco', amount: '100ml', store: 'any', aisle: 'Vini' },
-      { name: 'Olio EVO', amount: '3 cucchiai', store: 'any', aisle: 'Oli' },
-    ],
-    instructions: [
-      'Togliere la salsiccia dal budello',
-      'Sbriciolare e rosolare con cipolla',
-      'Sfumare con vino',
-      'Cuocere pasta al dente',
-      'Mantecare insieme'
-    ],
-    weatherSuitable: ['cold', 'rainy'],
-  },
-  {
-    id: 'pasta-zucchine',
-    name: 'Pasta con Zucchine (doppia porzione)',
-    chef: 'me',
-    prepTime: 20,
-    difficulty: 'easy',
-    tags: ['pasta', 'vegetarian', 'quick'],
-    ingredients: [
-      { name: 'Pasta', amount: '500g', store: 'any', aisle: 'Pasta' },
-      { name: 'Zucchine', amount: '5', store: 'any', aisle: 'Ortofrutta' },
-      { name: 'Aglio', amount: '3 spicchi', store: 'any', aisle: 'Ortofrutta' },
-      { name: 'Olio EVO', amount: '4 cucchiai', store: 'any', aisle: 'Oli' },
-      { name: 'Parmigiano', amount: '100g', store: 'any', aisle: 'Formaggi' },
-    ],
-    instructions: [
-      'Tagliare zucchine a dadini',
-      'Soffriggere aglio e zucchine',
-      'Cuocere pasta al dente',
-      'Mantecare insieme',
-      'Abbondante parmigiano'
-    ],
-    weatherSuitable: ['sunny', 'cloudy'],
-  },
-
-  // RISO - porzioni 200-250g riso crudo
-  {
-    id: 'risotto-funghi-semplice',
-    name: 'Risotto Funghi (doppia porzione)',
+    id: 'tortilla-spagnola',
+    name: 'Tortilla Spagnola',
     chef: 'me',
     prepTime: 25,
     difficulty: 'easy',
-    tags: ['rice', 'vegetarian', 'comfort'],
+    tags: ['pranzo', 'cena', 'protein', 'spanish', 'budget'],
+    mealType: 'dinner',
+    macros: { protein: 16, carbs: 30, fats: 20, calories: 380 },
     ingredients: [
-      { name: 'Riso Carnaroli', amount: '500g', store: 'any', aisle: 'Riso' },
-      { name: 'Funghi champignon', amount: '600g', store: 'any', aisle: 'Ortofrutta' },
-      { name: 'Brodo', amount: '1.5L', store: 'any', aisle: 'Brodi' },
-      { name: 'Cipolla', amount: '1 grande', store: 'any', aisle: 'Ortofrutta' },
-      { name: 'Parmigiano', amount: '150g', store: 'any', aisle: 'Formaggi' },
-      { name: 'Burro', amount: '80g', store: 'any', aisle: 'Latticini' },
+      { name: 'Uova', amount: '3', store: 'Migross', aisle: 'Latticini' },
+      { name: 'Patate', amount: '2 medie (200g)', store: 'Migross', aisle: 'Ortofrutta' },
+      { name: 'Cipolla', amount: '1', store: 'Migross', aisle: 'Ortofrutta' },
+      { name: 'Olio', amount: '3 cucchiai', store: 'Lidl', aisle: 'Oli' },
+      { name: 'Sale', amount: 'q.b.', store: 'Lidl', aisle: 'Condimenti' },
     ],
     instructions: [
-      'Soffriggere cipolla e funghi',
-      'Tostare il riso',
-      'Aggiungere brodo poco alla volta',
-      'Cuocere 18 minuti mescolando',
-      'Mantecare con burro e parmigiano'
+      'Tagliare patate e cipolla a fette sottili',
+      'Friggere le patate e cipolla nell\'olio fino a doratura',
+      'Scolare e lasciare intiepidire',
+      'Sbattere le uova e unire alle verdure',
+      'Cuocere in padella 3-4 minuti per lato'
     ],
-    weatherSuitable: ['cold', 'rainy'],
+    weatherSuitable: ['sunny', 'cloudy', 'cold'],
+    notes: 'Per atleta: aggiungere 1 uova in più'
   },
   {
-    id: 'risotto-pomodoro',
-    name: 'Risotto al Pomodoro (doppia porzione)',
-    chef: 'me',
-    prepTime: 25,
-    difficulty: 'easy',
-    tags: ['rice', 'vegetarian', 'comfort'],
-    ingredients: [
-      { name: 'Riso', amount: '500g', store: 'any', aisle: 'Riso' },
-      { name: 'Pomodori pelati', amount: '800g', store: 'any', aisle: 'Salse' },
-      { name: 'Cipolla', amount: '1 grande', store: 'any', aisle: 'Ortofrutta' },
-      { name: 'Brodo', amount: '1.5L', store: 'any', aisle: 'Brodi' },
-      { name: 'Parmigiano', amount: '150g', store: 'any', aisle: 'Formaggi' },
-    ],
-    instructions: [
-      'Soffriggere cipolla',
-      'Tostare il riso',
-      'Aggiungere pomodori e brodo',
-      'Cuocere 18 minuti',
-      'Mantecare con parmigiano'
-    ],
-    weatherSuitable: ['cold', 'rainy'],
-  },
-
-  // CARNE - porzioni 300-400g carne
-  {
-    id: 'pollo-padella',
-    name: 'Pollo in Padella (porzione XL)',
+    id: 'pollo-speziato',
+    name: 'Pollo Speziato',
     chef: 'me',
     prepTime: 20,
     difficulty: 'easy',
-    tags: ['chicken', 'quick', 'protein'],
+    tags: ['pranzo', 'cena', 'protein', 'low-carb', 'budget'],
+    mealType: 'dinner',
+    macros: { protein: 40, carbs: 5, fats: 12, calories: 320 },
     ingredients: [
-      { name: 'Petto di pollo', amount: '800g', store: 'any', aisle: 'Carne' },
-      { name: 'Limone', amount: '2', store: 'any', aisle: 'Ortofrutta' },
-      { name: 'Rosmarino', amount: '3 rametti', store: 'any', aisle: 'Erbe' },
-      { name: 'Olio EVO', amount: '4 cucchiai', store: 'any', aisle: 'Oli' },
-      { name: 'Sale', amount: 'q.b.', store: 'any', aisle: 'Condimenti' },
+      { name: 'Petto di pollo', amount: '250g', store: 'Migross', aisle: 'Carne' },
+      { name: 'Limone', amount: '1/2', store: 'Migross', aisle: 'Ortofrutta' },
+      { name: 'Paprika', amount: '1 cucchiaino', store: 'Lidl', aisle: 'Spezie' },
+      { name: 'Aglio', amount: '2 spicchi', store: 'Migross', aisle: 'Ortofrutta' },
+      { name: 'Olio', amount: '2 cucchiai', store: 'Lidl', aisle: 'Oli' },
+      { name: 'Sale e pepe', amount: 'q.b.', store: 'Lidl', aisle: 'Condimenti' },
     ],
     instructions: [
-      'Affettare il pollo a strisce',
-      'Scaldare olio in padella',
-      'Cuocere pollo 5 minuti per lato',
-      'Aggiungere rosmarino e limone',
-      'Servire caldo'
+      'Tagliare il pollo a strisce o fette',
+      'Marinare con limone, paprika, aglio, sale e pepe per 15 min',
+      'Scaldare l\'olio in padella',
+      'Cuocere il pollo 5-6 minuti per lato',
+      'Servire caldo con contorno di verdure'
     ],
-    weatherSuitable: ['sunny', 'cloudy'],
+    weatherSuitable: ['sunny', 'hot', 'cloudy'],
+    notes: 'Per atleta: aumentare a 300g di pollo'
   },
   {
-    id: 'salsicce-pomodoro',
-    name: 'Salsicce al Pomodoro (porzione XL)',
+    id: 'tostadas-fagioli',
+    name: 'Tostadas di Fagioli',
     chef: 'me',
-    prepTime: 30,
+    prepTime: 15,
     difficulty: 'easy',
-    tags: ['meat', 'comfort', 'protein'],
+    tags: ['pranzo', 'cena', 'vegetarian', 'mexican', 'budget'],
+    mealType: 'dinner',
+    macros: { protein: 15, carbs: 45, fats: 12, calories: 380 },
     ingredients: [
-      { name: 'Salsicce', amount: '800g', store: 'any', aisle: 'Carne' },
-      { name: 'Pomodori pelati', amount: '800g', store: 'any', aisle: 'Salse' },
-      { name: 'Cipolla', amount: '2 grandi', store: 'any', aisle: 'Ortofrutta' },
-      { name: 'Vino bianco', amount: '200ml', store: 'any', aisle: 'Vini' },
-      { name: 'Olio EVO', amount: '3 cucchiai', store: 'any', aisle: 'Oli' },
+      { name: 'Tortillas', amount: '2', store: 'Lidl', aisle: 'Panetteria' },
+      { name: 'Fagioli neri', amount: '1 scatola (240g)', store: 'Lidl', aisle: 'Conserve' },
+      { name: 'Cipolla', amount: '1/2', store: 'Migross', aisle: 'Ortofrutta' },
+      { name: 'Olio', amount: '2 cucchiai', store: 'Lidl', aisle: 'Oli' },
+      { name: 'Sale', amount: 'q.b.', store: 'Lidl', aisle: 'Condimenti' },
+      { name: 'Peperoncino', amount: 'q.b.', store: 'Lidl', aisle: 'Spezie' },
     ],
     instructions: [
-      'Rosolare salsicce in padella',
-      'Aggiungere cipolla tritata',
-      'Sfumare con vino bianco',
-      'Aggiungere pomodori',
-      'Cuocere 20 minuti a fuoco basso'
-    ],
-    weatherSuitable: ['cold', 'rainy'],
-  },
-  {
-    id: 'bistecca-griglia',
-    name: 'Bistecca alla Griglia (doppia)',
-    chef: 'me',
-    prepTime: 20,
-    difficulty: 'easy',
-    tags: ['grill', 'meat', 'protein', 'quick'],
-    ingredients: [
-      { name: 'Bistecca di manzo', amount: '600g (2 pezzi)', store: 'any', aisle: 'Carne' },
-      { name: 'Sale marino', amount: 'q.b.', store: 'any', aisle: 'Condimenti' },
-      { name: 'Pepe nero', amount: 'q.b.', store: 'any', aisle: 'Condimenti' },
-      { name: 'Olio EVO', amount: '3 cucchiai', store: 'any', aisle: 'Oli' },
-      { name: 'Rosmarino', amount: '3 rametti', store: 'any', aisle: 'Erbe' },
-    ],
-    instructions: [
-      'Togliere la carne dal frigo 30 minuti prima',
-      'Scaldare la griglia a temperatura alta',
-      'Condire la carne con sale, pepe e olio',
-      'Grigliare 3-4 minuti per lato',
-      'Lasciar riposare 5 minuti prima di servire'
+      'Tostare le tortillas in padella senza olio fino a croccantezza',
+      'Schiacciare i fagioli con una forchetta',
+      'Soffriggere cipolla nell\'olio',
+      'Aggiungere fagioli e cuocere 5 minuti',
+      'Spalmare su tortillas tostate e servire'
     ],
     weatherSuitable: ['sunny', 'hot'],
-  },
-
-  // UOVA - 4-6 uova
-  {
-    id: 'frittata',
-    name: 'Frittata di Verdure (XL)',
-    chef: 'me',
-    prepTime: 15,
-    difficulty: 'easy',
-    tags: ['eggs', 'vegetarian', 'quick', 'protein'],
-    ingredients: [
-      { name: 'Uova', amount: '8', store: 'any', aisle: 'Latticini' },
-      { name: 'Zucchine', amount: '3', store: 'any', aisle: 'Ortofrutta' },
-      { name: 'Cipolla', amount: '1 grande', store: 'any', aisle: 'Ortofrutta' },
-      { name: 'Parmigiano', amount: '100g', store: 'any', aisle: 'Formaggi' },
-      { name: 'Olio EVO', amount: '3 cucchiai', store: 'any', aisle: 'Oli' },
-    ],
-    instructions: [
-      'Tagliare zucchine e cipolla',
-      'Soffriggere le verdure 5 minuti',
-      'Sbattere uova con parmigiano',
-      'Versare in padella e cuocere',
-      'Girare e finire la cottura'
-    ],
-    weatherSuitable: ['sunny', 'cloudy', 'rainy'],
+    notes: 'Per atleta: aggiungere formaggio grattugiato'
   },
   {
-    id: 'uova-pomodoro',
-    name: 'Uova al Pomodoro (4 uova)',
-    chef: 'me',
-    prepTime: 15,
-    difficulty: 'easy',
-    tags: ['eggs', 'vegetarian', 'quick', 'protein'],
-    ingredients: [
-      { name: 'Uova', amount: '4', store: 'any', aisle: 'Latticini' },
-      { name: 'Pomodori pelati', amount: '400g', store: 'any', aisle: 'Salse' },
-      { name: 'Cipolla', amount: '1', store: 'any', aisle: 'Ortofrutta' },
-      { name: 'Olio EVO', amount: '3 cucchiai', store: 'any', aisle: 'Oli' },
-      { name: 'Basilico', amount: 'q.b.', store: 'any', aisle: 'Erbe' },
-    ],
-    instructions: [
-      'Soffriggere cipolla',
-      'Aggiungere pomodori e cuocere 10 min',
-      'Creare 4 buchi nel sugo',
-      'Romperci le uova dentro',
-      'Coprire e cuocere 5 minuti'
-    ],
-    weatherSuitable: ['sunny', 'cloudy', 'rainy'],
-  },
-
-  // CONTORNI - porzioni abbondanti
-  {
-    id: 'zucchine-padella',
-    name: 'Zucchine in Padella (XL)',
+    id: 'quesadillas',
+    name: 'Quesadillas',
     chef: 'me',
     prepTime: 10,
     difficulty: 'easy',
-    tags: ['vegetarian', 'quick', 'side', 'healthy'],
+    tags: ['pranzo', 'cena', 'vegetarian', 'mexican', 'budget', 'quick'],
+    mealType: 'dinner',
+    macros: { protein: 20, carbs: 35, fats: 25, calories: 450 },
     ingredients: [
-      { name: 'Zucchine', amount: '6', store: 'any', aisle: 'Ortofrutta' },
-      { name: 'Aglio', amount: '3 spicchi', store: 'any', aisle: 'Ortofrutta' },
-      { name: 'Olio EVO', amount: '4 cucchiai', store: 'any', aisle: 'Oli' },
-      { name: 'Menta', amount: 'q.b.', store: 'any', aisle: 'Erbe' },
-      { name: 'Sale', amount: 'q.b.', store: 'any', aisle: 'Condimenti' },
+      { name: 'Tortillas', amount: '2', store: 'Lidl', aisle: 'Panetteria' },
+      { name: 'Formaggio grattugiato', amount: '100g', store: 'Migross', aisle: 'Formaggi' },
+      { name: 'Olio', amount: '1 cucchiaio', store: 'Lidl', aisle: 'Oli' },
     ],
     instructions: [
-      'Tagliare zucchine a rondelle',
-      'Scaldare olio con aglio',
-      'Cuocere zucchine 8-10 minuti',
-      'Aggiungere menta a fine cottura',
-      'Servire come contorno'
+      'Scaldare l\'olio in padella antiaderente',
+      'Disporre una tortilla in padella',
+      'Spargere il formaggio uniformemente',
+      'Coprire con l\'altra tortilla',
+      'Cuocere 2-3 min per lato fino a doratura, tagliare a spicchi'
     ],
-    weatherSuitable: ['sunny', 'hot'],
+    weatherSuitable: ['sunny', 'hot', 'cloudy'],
+    notes: 'Per atleta: aggiungere petto di pollo a strisce'
   },
   {
-    id: 'peperonata',
-    name: 'Peperonata (XL)',
+    id: 'pollo-arrosto',
+    name: 'Pollo Arrosto',
     chef: 'me',
-    prepTime: 30,
+    prepTime: 50,
     difficulty: 'easy',
-    tags: ['vegetarian', 'side', 'make-ahead'],
+    tags: ['pranzo', 'cena', 'protein', 'comfort', 'budget'],
+    mealType: 'lunch',
+    macros: { protein: 45, carbs: 0, fats: 18, calories: 380 },
     ingredients: [
-      { name: 'Peperoni', amount: '6', store: 'any', aisle: 'Ortofrutta' },
-      { name: 'Cipolle', amount: '3', store: 'any', aisle: 'Ortofrutta' },
-      { name: 'Pomodori pelati', amount: '400g', store: 'any', aisle: 'Salse' },
-      { name: 'Olio EVO', amount: '5 cucchiai', store: 'any', aisle: 'Oli' },
-      { name: 'Capperi', amount: '2 cucchiai', store: 'any', aisle: 'Conserve' },
+      { name: 'Cosce di pollo', amount: '2 (400g)', store: 'Migross', aisle: 'Carne' },
+      { name: 'Aglio', amount: '2 spicchi', store: 'Migross', aisle: 'Ortofrutta' },
+      { name: 'Rosmarino', amount: 'q.b.', store: 'Lidl', aisle: 'Spezie' },
+      { name: 'Olio', amount: '2 cucchiai', store: 'Lidl', aisle: 'Oli' },
+      { name: 'Sale e pepe', amount: 'q.b.', store: 'Lidl', aisle: 'Condimenti' },
     ],
     instructions: [
-      'Tagliare peperoni e cipolle a strisce',
-      'Soffriggere in olio 10 minuti',
-      'Aggiungere pomodori e capperi',
-      'Cuocere 20 minuti',
-      'Servire tiepida o fredda'
+      'Scaldare il forno a 180°C',
+      'Insaporire le cosce con sale, pepe, aglio e rosmarino',
+      'Disporre su teglia con un filo d\'olio',
+      'Infornare per 45 minuti',
+      'Lasciare riposare 5 minuti prima di servire'
     ],
-    weatherSuitable: ['sunny', 'cloudy'],
+    weatherSuitable: ['sunny', 'cloudy', 'cold', 'rainy'],
+    notes: 'Per atleta: mangiare entrambe le cosce'
   },
   {
-    id: 'melanzane-forno',
-    name: 'Melanzane al Forno (XL)',
-    chef: 'me',
-    prepTime: 40,
-    difficulty: 'medium',
-    tags: ['vegetarian', 'oven', 'comfort'],
-    ingredients: [
-      { name: 'Melanzane', amount: '3 grandi', store: 'any', aisle: 'Ortofrutta' },
-      { name: 'Pomodori pelati', amount: '600g', store: 'any', aisle: 'Salse' },
-      { name: 'Parmigiano', amount: '150g', store: 'any', aisle: 'Formaggi' },
-      { name: 'Aglio', amount: '3 spicchi', store: 'any', aisle: 'Ortofrutta' },
-      { name: 'Olio EVO', amount: '4 cucchiai', store: 'any', aisle: 'Oli' },
-    ],
-    instructions: [
-      'Tagliare melanzane a fette',
-      'Disporre su teglia con pomodori',
-      'Aggiungere aglio e parmigiano',
-      'Infornare a 200° per 30 min',
-      'Servire caldo'
-    ],
-    weatherSuitable: ['cold', 'rainy'],
-  },
-  {
-    id: 'insalata-pomodori',
-    name: 'Insalata di Pomodori (XL)',
-    chef: 'me',
-    prepTime: 5,
-    difficulty: 'easy',
-    tags: ['salad', 'vegetarian', 'quick', 'cold'],
-    ingredients: [
-      { name: 'Pomodori', amount: '6', store: 'any', aisle: 'Ortofrutta' },
-      { name: 'Cipolla rossa', amount: '1 grande', store: 'any', aisle: 'Ortofrutta' },
-      { name: 'Olio EVO', amount: '4 cucchiai', store: 'any', aisle: 'Oli' },
-      { name: 'Origano', amount: 'q.b.', store: 'any', aisle: 'Spezie' },
-      { name: 'Sale', amount: 'q.b.', store: 'any', aisle: 'Condimenti' },
-    ],
-    instructions: [
-      'Tagliare pomodori a spicchi',
-      'Affettare cipolla sottile',
-      'Condire con olio e sale',
-      'Aggiungere origano',
-      'Lasciar riposare 10 minuti'
-    ],
-    weatherSuitable: ['sunny', 'hot'],
-  },
-
-  // PESCE - porzioni 300-400g
-  {
-    id: 'salmone-griglia',
-    name: 'Salmone alla Griglia (doppio)',
+    id: 'uova-ranchero',
+    name: 'Uova Ranchero',
     chef: 'me',
     prepTime: 15,
     difficulty: 'easy',
-    tags: ['grill', 'fish', 'protein', 'healthy'],
+    tags: ['pranzo', 'cena', 'protein', 'mexican', 'budget'],
+    mealType: 'dinner',
+    macros: { protein: 18, carbs: 30, fats: 20, calories: 380 },
     ingredients: [
-      { name: 'Filetto di salmone', amount: '400g (2 pezzi)', store: 'any', aisle: 'Pesce' },
-      { name: 'Limone', amount: '2', store: 'any', aisle: 'Ortofrutta' },
-      { name: 'Olio EVO', amount: '3 cucchiai', store: 'any', aisle: 'Oli' },
-      { name: 'Aneto', amount: 'q.b.', store: 'any', aisle: 'Erbe' },
-      { name: 'Sale', amount: 'q.b.', store: 'any', aisle: 'Condimenti' },
+      { name: 'Tortillas', amount: '2', store: 'Lidl', aisle: 'Panetteria' },
+      { name: 'Fagioli neri', amount: '1/2 scatola (120g)', store: 'Lidl', aisle: 'Conserve' },
+      { name: 'Uova', amount: '2', store: 'Migross', aisle: 'Latticini' },
+      { name: 'Passata di pomodoro', amount: '100g', store: 'Lidl', aisle: 'Conserve' },
+      { name: 'Olio', amount: '2 cucchiai', store: 'Lidl', aisle: 'Oli' },
+      { name: 'Cipolla', amount: '1/4', store: 'Migross', aisle: 'Ortofrutta' },
     ],
     instructions: [
-      'Scaldare la griglia',
-      'Condire il salmone con olio, sale e limone',
-      'Grigliare 4-5 minuti per lato',
-      'Servire con aneto fresco'
+      'Scaldare le tortillas in padella',
+      'Preparare salsa con passata, cipolla e olio, cuocere 5 min',
+      'Friggere le uova in padella',
+      'Scaldare i fagioli',
+      'Assemblare: tortilla, fagioli, uovo fritto, salsa pomodoro'
     ],
-    weatherSuitable: ['sunny', 'hot'],
+    weatherSuitable: ['sunny', 'cloudy', 'hot'],
+    notes: 'Per atleta: aggiungere avocado se disponibile'
   },
-
-  // MINESTRA
   {
-    id: 'minestrone',
-    name: 'Minestrone (pentola XL)',
+    id: 'risotto',
+    name: 'Risotto',
     chef: 'me',
-    prepTime: 45,
-    difficulty: 'easy',
-    tags: ['soup', 'vegetarian', 'comfort', 'meal-prep'],
+    prepTime: 30,
+    difficulty: 'medium',
+    tags: ['pranzo', 'cena', 'comfort', 'italian', 'budget'],
+    mealType: 'lunch',
+    macros: { protein: 12, carbs: 70, fats: 15, calories: 480 },
     ingredients: [
-      { name: 'Zucchine', amount: '3', store: 'any', aisle: 'Ortofrutta' },
-      { name: 'Carote', amount: '4', store: 'any', aisle: 'Ortofrutta' },
-      { name: 'Patate', amount: '3', store: 'any', aisle: 'Ortofrutta' },
-      { name: 'Fagioli borlotti', amount: '2 scatole', store: 'any', aisle: 'Conserve' },
-      { name: 'Pasta mista', amount: '300g', store: 'any', aisle: 'Pasta' },
-      { name: 'Brodo', amount: '2L', store: 'any', aisle: 'Brodi' },
-      { name: 'Cipolla', amount: '1', store: 'any', aisle: 'Ortofrutta' },
-      { name: 'Olio', amount: '4 cucchiai', store: 'any', aisle: 'Oli' },
+      { name: 'Riso Carnaroli', amount: '100g', store: 'Lidl', aisle: 'Riso' },
+      { name: 'Brodo vegetale', amount: '500ml', store: 'Lidl', aisle: 'Brodi' },
+      { name: 'Cipolla', amount: '1/2', store: 'Migross', aisle: 'Ortofrutta' },
+      { name: 'Vino bianco', amount: '50ml (opzionale)', store: 'Lidl', aisle: 'Vini' },
+      { name: 'Parmigiano', amount: '30g', store: 'Migross', aisle: 'Formaggi' },
+      { name: 'Olio', amount: '1 cucchiaio', store: 'Lidl', aisle: 'Oli' },
+      { name: 'Burro', amount: '20g', store: 'Migross', aisle: 'Latticini' },
     ],
     instructions: [
-      'Soffriggere la cipolla',
-      'Aggiungere le verdure tagliate a cubetti',
-      'Coprire con brodo e cuocere 30 minuti',
-      'Aggiungere i fagioli',
-      'Aggiungere pasta e cuocere altri 10 minuti'
+      'Soffriggere la cipolla nell\'olio',
+      'Tostare il riso 2 minuti',
+      'Sfumare con vino (opzionale)',
+      'Aggiungere brodo caldo poco alla volta',
+      'Cuocere 18 minuti, mantecare con burro e parmigiano'
+    ],
+    weatherSuitable: ['cold', 'rainy', 'cloudy'],
+    notes: 'Per atleta: aggiungere pollo o funghi per più proteine'
+  },
+  {
+    id: 'zuppa-verdure',
+    name: 'Zuppa di Verdure',
+    chef: 'me',
+    prepTime: 30,
+    difficulty: 'easy',
+    tags: ['pranzo', 'cena', 'vegetarian', 'healthy', 'budget'],
+    mealType: 'lunch',
+    macros: { protein: 8, carbs: 35, fats: 8, calories: 250 },
+    ingredients: [
+      { name: 'Carote', amount: '2', store: 'Migross', aisle: 'Ortofrutta' },
+      { name: 'Zucchine', amount: '2', store: 'Migross', aisle: 'Ortofrutta' },
+      { name: 'Patate', amount: '2', store: 'Migross', aisle: 'Ortofrutta' },
+      { name: 'Cipolla', amount: '1', store: 'Migross', aisle: 'Ortofrutta' },
+      { name: 'Brodo vegetale', amount: '500ml', store: 'Lidl', aisle: 'Brodi' },
+      { name: 'Olio', amount: '2 cucchiai', store: 'Lidl', aisle: 'Oli' },
+      { name: 'Sale e pepe', amount: 'q.b.', store: 'Lidl', aisle: 'Condimenti' },
+    ],
+    instructions: [
+      'Tagliare tutte le verdure a dadini',
+      'Soffriggere cipolla nell\'olio',
+      'Aggiungere le altre verdure e cuocere 5 min',
+      'Coprire con brodo caldo',
+      'Cuocere 20 minuti, frullare se desiderato'
     ],
     weatherSuitable: ['cold', 'rainy'],
+    notes: 'Per atleta: aggiungere fagioli o pasta'
+  },
+  {
+    id: 'riso-pollo',
+    name: 'Riso con Pollo',
+    chef: 'me',
+    prepTime: 20,
+    difficulty: 'easy',
+    tags: ['pranzo', 'cena', 'protein', 'quick', 'budget'],
+    mealType: 'lunch',
+    macros: { protein: 35, carbs: 50, fats: 12, calories: 480 },
+    ingredients: [
+      { name: 'Riso', amount: '100g', store: 'Lidl', aisle: 'Riso' },
+      { name: 'Petto di pollo', amount: '200g', store: 'Migross', aisle: 'Carne' },
+      { name: 'Olio', amount: '2 cucchiai', store: 'Lidl', aisle: 'Oli' },
+      { name: 'Sale e pepe', amount: 'q.b.', store: 'Lidl', aisle: 'Condimenti' },
+    ],
+    instructions: [
+      'Cuocere il riso in acqua salata',
+      'Tagliare il pollo a cubetti',
+      'Cuocere il pollo in padella con olio',
+      'Insaporire con sale e pepe',
+      'Servire il pollo con il riso'
+    ],
+    weatherSuitable: ['sunny', 'cloudy', 'hot'],
+    notes: 'Per atleta: aumentare pollo a 250g'
   },
 ];
 
+// ========== MENU SETTIMANALE PREDEFINITO ==========
+// Lunedì: Pancake (3pz) / Polenta+uovo / Tacos di pollo
+// Martedì: Pancake avanzo / Pasta e fagioli / Frittata
+// Mercoledì: Pancake (3pz) / Riso+pollo avanzo / Tortilla spagnola
+// Giovedì: Pancake avanzo / Zuppa verdure / Pollo speziato
+// Venerdì: Pancake (3pz) / Pasta avanzo / Tostadas fagioli
+// Sabato: Frittata / Risotto / Quesadillas
+// Domenica: Pancake speciale / Pollo arrosto / Uova ranchero
+
+export const weeklyMenuPlan = [
+  { day: 'Lunedì', breakfast: 'colazione-pancake', lunch: 'polenta-uovo', dinner: 'tacos-pollo' },
+  { day: 'Martedì', breakfast: 'colazione-pancake', lunch: 'pasta-fagioli', dinner: 'colazione-frittata' },
+  { day: 'Mercoledì', breakfast: 'colazione-pancake', lunch: 'riso-pollo', dinner: 'tortilla-spagnola' },
+  { day: 'Giovedì', breakfast: 'colazione-pancake', lunch: 'zuppa-verdure', dinner: 'pollo-speziato' },
+  { day: 'Venerdì', breakfast: 'colazione-pancake', lunch: 'pasta-fagioli', dinner: 'tostadas-fagioli' },
+  { day: 'Sabato', breakfast: 'colazione-frittata', lunch: 'risotto', dinner: 'quesadillas' },
+  { day: 'Domenica', breakfast: 'colazione-pancake', lunch: 'pollo-arrosto', dinner: 'uova-ranchero' },
+];
+
+// Helper functions
 export function getRecipes(): Recipe[] {
   return recipes;
 }
@@ -425,70 +418,49 @@ export function getRecipesByTag(tag: string): Recipe[] {
   return recipes.filter(r => r.tags.includes(tag));
 }
 
+export function getRecipesByMealType(mealType: 'breakfast' | 'lunch' | 'dinner'): Recipe[] {
+  return recipes.filter(r => r.mealType === mealType);
+}
+
 export function getRecipesByWeather(weather: 'sunny' | 'rainy' | 'cold' | 'hot' | 'cloudy'): Recipe[] {
   return recipes.filter(r => r.weatherSuitable.includes(weather));
+}
+
+// Generate daily meal plan based on day of week (Anselmo's plan)
+export function generateDailyMealPlan(weather: WeatherForecast, dayIndex: number = 0): {
+  breakfast: Recipe;
+  lunch: Recipe;
+  dinner: Recipe;
+} {
+  const dayPlan = weeklyMenuPlan[dayIndex % 7];
+  
+  return {
+    breakfast: getRecipeById(dayPlan.breakfast) || recipes[0],
+    lunch: getRecipeById(dayPlan.lunch) || recipes[2],
+    dinner: getRecipeById(dayPlan.dinner) || recipes[3],
+  };
 }
 
 export function generateWeeklyMealPlan(weatherForecast: WeatherForecast[]): MealPlan[] {
   const today = new Date();
   const plan: MealPlan[] = [];
-  const usedRecipes = new Set<string>();
-  
-  // Giorni di allenamento: più proteine
-  const trainingDays = [1, 3, 5]; // Lun, Mer, Ven
   
   for (let i = 0; i < 7; i++) {
     const date = new Date(today);
     date.setDate(today.getDate() + i);
     const dateStr = date.toISOString().split('T')[0];
-    const dayOfWeek = date.getDay();
+    
+    const dayOfWeek = date.getDay(); // 0 = Domenica, 1 = Lunedì, ...
+    const dayIndex = dayOfWeek === 0 ? 6 : dayOfWeek - 1; // Converti a 0 = Lunedì
     
     const weather = weatherForecast[i] || { condition: 'cloudy' };
-    const isTrainingDay = trainingDays.includes(dayOfWeek);
-    const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
-    
-    // Seleziona ricette in base al meteo e giorno
-    let suitableRecipes = recipes.filter(r => 
-      (r.weatherSuitable.includes(weather.condition as any) || 
-      r.weatherSuitable.length === 0) &&
-      !usedRecipes.has(r.id)
-    );
-    
-    if (suitableRecipes.length === 0) {
-      suitableRecipes = recipes.filter(r => !usedRecipes.has(r.id));
-    }
-    
-    if (suitableRecipes.length === 0) {
-      usedRecipes.clear();
-      suitableRecipes = recipes;
-    }
-    
-    // Giorni di allenamento: priorità a proteine (carne, pesce, uova)
-    let dinnerPool;
-    if (isTrainingDay) {
-      dinnerPool = suitableRecipes.filter(r => 
-        r.tags.includes('protein') || r.tags.includes('meat') || r.tags.includes('fish')
-      );
-    } else if (isWeekend) {
-      dinnerPool = suitableRecipes.filter(r => r.prepTime >= 30);
-    } else {
-      dinnerPool = suitableRecipes.filter(r => r.prepTime <= 25);
-    }
-    
-    // Se il pool è vuoto, usa tutte le ricette adatte
-    if (dinnerPool.length === 0) {
-      dinnerPool = suitableRecipes;
-    }
-    
-    const dinner = dinnerPool[Math.floor(Math.random() * dinnerPool.length)] || recipes[0];
-    
-    if (dinner) {
-      usedRecipes.add(dinner.id);
-    }
+    const dailyPlan = generateDailyMealPlan(weather, dayIndex);
     
     plan.push({
       date: dateStr,
-      dinner: dinner || recipes[0],
+      breakfast: dailyPlan.breakfast,
+      lunch: dailyPlan.lunch,
+      dinner: dailyPlan.dinner,
     });
   }
   
@@ -499,27 +471,51 @@ export function generateShoppingList(mealPlan: MealPlan[]): ShoppingItem[] {
   const items: Map<string, ShoppingItem> = new Map();
   
   mealPlan.forEach(day => {
-    const recipe = day.dinner || day.lunch;
-    if (recipe) {
-      recipe.ingredients.forEach(ing => {
-        const key = `${ing.name}`;
-        if (!items.has(key)) {
-          items.set(key, {
-            ...ing,
-            id: key,
-            checked: false,
-            recipeId: recipe.id,
-            recipeName: recipe.name,
-          });
-        }
-      });
-    }
+    const meals = [day.breakfast, day.lunch, day.dinner].filter(Boolean);
+    
+    meals.forEach(recipe => {
+      if (recipe) {
+        recipe.ingredients.forEach(ing => {
+          const key = `${ing.name}-${ing.store}`;
+          if (!items.has(key)) {
+            items.set(key, {
+              ...ing,
+              id: key,
+              checked: false,
+              recipeId: recipe.id,
+              recipeName: recipe.name,
+            });
+          }
+        });
+      }
+    });
   });
   
   return Array.from(items.values());
 }
 
-// Lista della spesa SENZA divisione per supermercato
+// Lista della spesa divisa per supermercato
+export function groupShoppingListByStore(items: ShoppingItem[]): { store: string; items: ShoppingItem[] }[] {
+  const grouped = items.reduce((acc, item) => {
+    const store = item.store || 'Altro';
+    if (!acc[store]) {
+      acc[store] = [];
+    }
+    acc[store].push(item);
+    return acc;
+  }, {} as Record<string, ShoppingItem[]>);
+  
+  return Object.entries(grouped)
+    .map(([store, items]) => ({ store, items }))
+    .sort((a, b) => {
+      // Migross prima (fresco), poi Lidl (dispensa)
+      if (a.store === 'Migross') return -1;
+      if (b.store === 'Migross') return 1;
+      return a.store.localeCompare(b.store);
+    });
+}
+
+// Lista della spesa per reparto
 export function groupShoppingListByAisle(items: ShoppingItem[]): { aisle: string; items: ShoppingItem[] }[] {
   const grouped = items.reduce((acc, item) => {
     if (!acc[item.aisle]) {
@@ -530,7 +526,7 @@ export function groupShoppingListByAisle(items: ShoppingItem[]): { aisle: string
   }, {} as Record<string, ShoppingItem[]>);
   
   // Ordine logico del supermercato
-  const aisleOrder = ['Ortofrutta', 'Carne', 'Pesce', 'Pasta', 'Riso', 'Salse', 'Conserve', 'Formaggi', 'Latticini', 'Panetteria', 'Oli', 'Spezie', 'Erbe', 'Brodi', 'Vini', 'Condimenti'];
+  const aisleOrder = ['Ortofrutta', 'Carne', 'Pesce', 'Pasta', 'Riso', 'Salse', 'Conserve', 'Formaggi', 'Latticini', 'Panetteria', 'Cereali', 'Dolci', 'Spezie', 'Oli', 'Brodi', 'Vini', 'Condimenti'];
   
   return Object.entries(grouped)
     .map(([aisle, items]) => ({ aisle, items }))
@@ -542,4 +538,27 @@ export function groupShoppingListByAisle(items: ShoppingItem[]): { aisle: string
       if (bIndex === -1) return -1;
       return aIndex - bIndex;
     });
+}
+
+// Calculate daily macros
+export function calculateDailyMacros(mealPlan: MealPlan): { protein: number; carbs: number; fats: number; calories: number } {
+  const meals = [mealPlan.breakfast, mealPlan.lunch, mealPlan.dinner].filter(Boolean);
+  
+  return meals.reduce((acc, meal) => ({
+    protein: acc.protein + (meal?.macros?.protein || 0),
+    carbs: acc.carbs + (meal?.macros?.carbs || 0),
+    fats: acc.fats + (meal?.macros?.fats || 0),
+    calories: acc.calories + (meal?.macros?.calories || 0),
+  }), { protein: 0, carbs: 0, fats: 0, calories: 0 });
+}
+
+// Calculate weekly budget estimate
+export function calculateWeeklyBudget(): number {
+  // Stima basata su 30-35€/settimana
+  return 32.5;
+}
+
+// Get weekly menu plan
+export function getWeeklyMenuPlan() {
+  return weeklyMenuPlan;
 }

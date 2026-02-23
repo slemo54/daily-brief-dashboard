@@ -1,10 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Textarea } from '@/components/ui/textarea';
-import { Button } from '@/components/ui/button';
-import { Save, Trash2 } from 'lucide-react';
+import { Save, Trash2, FileText } from 'lucide-react';
 
 export function QuickNotesWidget() {
   const [notes, setNotes] = useState('');
@@ -27,31 +24,43 @@ export function QuickNotesWidget() {
   };
 
   return (
-    <Card className="h-full">
-      <CardHeader className="pb-2">
-        <CardTitle className="text-sm font-medium text-muted-foreground flex justify-between items-center">
-          <span>📝 Quick Notes</span>
-          <div className="flex gap-1">
-            <Button size="sm" variant="ghost" onClick={saveNotes}>
-              <Save className={`w-4 h-4 ${saved ? 'text-green-500' : ''}`} />
-            </Button>
-            <Button size="sm" variant="ghost" onClick={clearNotes}>
-              <Trash2 className="w-4 h-4" />
-            </Button>
+    <div className="glass-card p-5">
+      <div className="flex items-center justify-between mb-5">
+        <div className="flex items-center gap-2">
+          <div className="p-2 rounded-xl bg-[#f59e0b]/10">
+            <FileText className="w-4 h-4 text-[#f59e0b]" />
           </div>
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="p-4">
-        <Textarea
-          placeholder="Scrivi i tuoi appunti qui..."
-          value={notes}
-          onChange={(e) => setNotes(e.target.value)}
-          className="min-h-[120px] resize-none"
-        />
-        {saved && (
-          <p className="text-xs text-green-500 mt-2">Salvato! ✅</p>
-        )}
-      </CardContent>
-    </Card>
+          <span className="text-sm font-medium text-[#9ca3af]">Quick Notes</span>
+        </div>
+        
+        <div className="flex items-center gap-2">
+          {saved && (
+            <span className="text-xs text-[#22c55e] animate-pulse">Salvato! ✓</span>
+          )}
+          <button
+            onClick={saveNotes}
+            className="btn-glass w-8 h-8 rounded-lg flex items-center justify-center"
+            title="Salva note"
+          >
+            <Save className={`w-4 h-4 ${saved ? 'text-[#22c55e]' : 'text-[#9ca3af]'}`} />
+          </button>
+          
+          <button
+            onClick={clearNotes}
+            className="btn-glass w-8 h-8 rounded-lg flex items-center justify-center hover:bg-[#ef4444]/10 hover:border-[#ef4444]/30"
+            title="Cancella note"
+          >
+            <Trash2 className="w-4 h-4 text-[#9ca3af] hover:text-[#ef4444]" />
+          </button>
+        </div>
+      </div>
+
+      <textarea
+        placeholder="Scrivi i tuoi appunti qui..."
+        value={notes}
+        onChange={(e) => setNotes(e.target.value)}
+        className="input-glass w-full min-h-[150px] p-4 rounded-xl text-sm text-[#ebebeb] placeholder:text-[#6b7280] resize-none custom-scrollbar"
+      />
+    </div>
   );
 }

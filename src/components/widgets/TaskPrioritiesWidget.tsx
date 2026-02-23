@@ -1,11 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { Plus, Trash2, CheckCircle2, Circle } from 'lucide-react';
+import { Plus, Trash2, CheckCircle2, Circle, Flag } from 'lucide-react';
 
 interface Task {
   id: string;
@@ -42,73 +38,110 @@ export function TaskPrioritiesWidget() {
     setTasks(tasks.filter(t => t.id !== id));
   };
 
-  const priorityColors = {
-    high: 'bg-red-500/20 text-red-400 border-red-500/30',
-    medium: 'bg-yellow-500/20 text-yellow-400 border-yellow-500/30',
-    low: 'bg-green-500/20 text-green-400 border-green-500/30',
+  const priorityConfig = {
+    high: { color: '#ef4444', bgColor: 'rgba(239, 68, 68, 0.1)', label: 'Alta' },
+    medium: { color: '#f59e0b', bgColor: 'rgba(245, 158, 11, 0.1)', label: 'Media' },
+    low: { color: '#22c55e', bgColor: 'rgba(34, 197, 94, 0.1)', label: 'Bassa' },
   };
 
-  return (
-    <Card>
-      <CardHeader className="pb-2">
-        <CardTitle className="text-sm font-medium text-muted-foreground">
-          ✅ Task Priorities
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="p-4">
-        <div className="flex gap-2 mb-4">
-          <Input
-            placeholder="Nuovo task..."
-            value={newTask}
-            onChange={(e) => setNewTask(e.target.value)}
-            onKeyDown={(e) => e.key === 'Enter' && addTask()}
-            className="flex-1"
-          />
-          <select
-            value={newPriority}
-            onChange={(e) => setNewPriority(e.target.value as 'high' | 'medium' | 'low')}
-            className="px-2 rounded-md bg-secondary text-sm"
-          >
-            <option value="high">Alta</option>
-            <option value="medium">Media</option>
-            <option value="low">Bassa</option>
-          </select>
-          <Button size="sm" onClick={addTask}>
-            <Plus className="w-4 h-4" />
-          </Button>
-        </div>
+  const completedCount = tasks.filter(t => t.completed).length;
+  const progress = tasks.length > 0 ? (completedCount / tasks.length) * 100 : 0;
 
-        <div className="space-y-2">
-          {tasks.map((task) => (
-            <div
-              key={task.id}
-              className={`flex items-center gap-2 p-2 rounded-lg ${task.completed ? 'opacity-50' : ''}`}
-            >
-              <button
-                onClick={() => toggleTask(task.id)}
-                className="text-muted-foreground hover:text-primary"
-              >
-                {task.completed ? <CheckCircle2 className="w-5 h-5" /> : <Circle className="w-5 h-5" />}
-              </button>
-              
-              <span className={`flex-1 ${task.completed ? 'line-through' : ''}`}>
-                {task.text}
-              </span>
-              
-              <Badge variant="outline" className={`text-xs ${priorityColors[task.priority]}`}>
-                {task.priority}
-              </Badge>
-              
-              <button
-                onClick={() => deleteTask(task.id)}
-                className="text-muted-foreground hover:text-red-400"
-              >
-                <Trash2 className="w-4 h-4" />
-              </button>
-            </div>
-          ))}
+  return (
+    <div className="glass-card p-5">
+      <div className="flex items-center justify-between mb-5">
+        <div className="flex items-center gap-2">
+          <div className="p-2 rounded-xl bg-[#22c55e]/10">
+            <CheckCircle2 className="w-4 h-4 text-[#22c55e]" />
+          </div>
+          <span className="text-sm font-medium text-[#9ca3af]">Task Priorities</span>
         </div>
-      </CardContent>
-    </Card>
+        <div className="flex items-center gap-1 px-3 py-1 rounded-full bg-[#1a1a1a] border border-[#2a2a2a]">
+          <span className="text-xs text-[#6b7280]">{completedCount}/{tasks.length}</span>
+        </div>
+      </div>
+
+      {/* Progress Bar */}
+      <div className="relative h-1.5 bg-[#1a1a1a] rounded-full mb-5 overflow-hidden">
+        <div 
+          className="absolute inset-y-0 left-0 rounded-full bg-[#22c55e] transition-all duration-500"
+          style={{ width: `${progress}%` }}
+        />
+      </div>
+
+      {/* Add Task */}
+      <div className="flex gap-2 mb-5">
+        <input
+          type="text"
+          placeholder="Nuovo task..."
+          value={newTask}
+          onChange={(e) => setNewTask(e.target.value)}
+          onKeyDown={(e) => e.key === 'Enter' && addTask()}
+          className="input-glass flex-1 px-4 py-2.5 rounded-xl text-sm text-[#ebebeb] placeholder:text-[#6b7280]"
+        />
+        <select
+          value={newPriority}
+          onChange={(e) => setNewPriority(e.target.value as 'high' | 'medium' | 'low')}
+          className="input-glass px-3 py-2.5 rounded-xl text-sm text-[#9ca3af] cursor-pointer bg-[#1a1a1a]"
+        >
+          <option value="high" className="bg-[#1a1a1a]">Alta</option>
+          <option value="medium" className="bg-[#1a1a1a]">Media</option>
+          <option value="low" className="bg-[#1a1a1a]">Bassa</option>
+        </select>
+        
+        <button
+          onClick={addTask}
+          className="btn-primary w-10 h-10 rounded-xl flex items-center justify-center"
+        >
+          <Plus className="w-5 h-5 text-white" />
+        </button>
+      </div>
+
+      {/* Task List */}
+      <div className="space-y-2 max-h-[250px] overflow-y-auto custom-scrollbar">
+        {tasks.map((task) => (
+          <div
+            key={task.id}
+            className={`
+              flex items-center gap-3 p-3 rounded-xl transition-all duration-300
+              ${task.completed ? 'opacity-50' : 'hover:bg-[#1a1a1a]'}
+            `}
+          >
+            <button
+              onClick={() => toggleTask(task.id)}
+              className="flex-shrink-0"
+            >
+              {task.completed ? (
+                <CheckCircle2 className="w-5 h-5 text-[#22c55e]" />
+              ) : (
+                <Circle className="w-5 h-5 text-[#6b7280] hover:text-[#9ca3af] transition-colors" />
+              )}
+            </button>
+            
+            <span className={`flex-1 text-sm ${task.completed ? 'line-through text-[#6b7280]' : 'text-[#ebebeb]'}`}>
+              {task.text}
+            </span>
+            
+            <div 
+              className="flex items-center gap-1 px-2 py-1 rounded-lg text-xs"
+              style={{ 
+                backgroundColor: priorityConfig[task.priority].bgColor,
+                color: priorityConfig[task.priority].color 
+              }}
+            >
+              <Flag className="w-3 h-3" />
+              {priorityConfig[task.priority].label}
+            </div>
+            
+            <button
+              onClick={() => deleteTask(task.id)}
+              className="flex-shrink-0 p-1 rounded-lg hover:bg-[#ef4444]/10 text-[#6b7280] hover:text-[#ef4444] transition-colors"
+            >
+              <Trash2 className="w-4 h-4" />
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }

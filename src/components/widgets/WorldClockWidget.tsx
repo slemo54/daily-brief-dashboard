@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Globe } from 'lucide-react';
 
 interface Clock {
   city: string;
@@ -38,26 +38,28 @@ export function WorldClockWidget() {
   }, []);
 
   return (
-    <Card>
-      <CardHeader className="pb-2">
-        <CardTitle className="text-sm font-medium text-muted-foreground">
-          🌍 World Clock
-        </CardTitle>
-      </CardHeader>
-      <CardContent className="p-4">
-        <div className="grid grid-cols-2 gap-3">
-          {clocks.map((clock) => (
-            <div
-              key={clock.city}
-              className="text-center p-3 rounded-lg bg-secondary/50"
-            >
-              <div className="text-2xl mb-1">{clock.emoji}</div>
-              <div className="text-lg font-bold">{times[clock.city] || '--:--'}</div>
-              <div className="text-xs text-muted-foreground">{clock.city}</div>
-            </div>
-          ))}
+    <div className="glass-card p-5">
+      <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center gap-2">
+          <div className="p-2 rounded-xl bg-[#3b82f6]/10">
+            <Globe className="w-4 h-4 text-[#3b82f6]" />
+          </div>
+          <span className="text-sm font-medium text-[#9ca3af]">World Clock</span>
         </div>
-      </CardContent>
-    </Card>
+      </div>
+
+      <div className="grid grid-cols-2 gap-3">
+        {clocks.map((clock) => (
+          <div
+            key={clock.city}
+            className="p-3 rounded-xl bg-[#1a1a1a] hover:bg-[#222222] transition-all duration-300 group border border-[#2a2a2a] hover:border-[#3a3a3a]"
+          >
+            <div className="text-2xl mb-1 group-hover:scale-110 transition-transform">{clock.emoji}</div>
+            <div className="text-lg font-bold text-[#ebebeb]">{times[clock.city] || '--:--'}</div>
+            <div className="text-xs text-[#6b7280]">{clock.city}</div>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }
